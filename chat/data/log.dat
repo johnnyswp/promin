@@ -1,0 +1,177 @@
+Application path: /php/app.php?install-wizard-2
+2017-05-29 23:44:48 [error] SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+Stack trace:
+/home/emktcom/public_html/chat2/php/service/Database.php:49 (Logger:error())
+/home/emktcom/public_html/chat2/php/service/Database.php:67 (Database:connect())
+/home/emktcom/public_html/chat2/php/service/Database.php:28 (Database:reconnect())
+/home/emktcom/public_html/chat2/php/lib/Service.php:17 (Database:onRegister())
+/home/emktcom/public_html/chat2/php/lib/ServiceContainer.php:55 (Service:setServiceContainer())
+/home/emktcom/public_html/chat2/php/lib/Controller.php:33 (ServiceContainer:get())
+/home/emktcom/public_html/chat2/php/controller/InstallController.php:2 (Controller:get())
+/home/emktcom/public_html/chat2/php/app/Application.php:165 (InstallController:wizard2Action())
+/home/emktcom/public_html/chat2/php/app/Application.php:89 (Application:runAction())
+/home/emktcom/public_html/chat2/php/app.php:27 (Application:run())
+
+2017-05-29 23:44:48 [error] SQLSTATE[HY000] [1045] Access denied for user 'emktcom_rolando'@'localhost' (using password: YES)
+Stack trace:
+/home/emktcom/public_html/chat2/php/service/Database.php:49 (Logger:error())
+/home/emktcom/public_html/chat2/php/controller/InstallController.php:2 (Database:connect())
+/home/emktcom/public_html/chat2/php/app/Application.php:165 (InstallController:wizard2Action())
+/home/emktcom/public_html/chat2/php/app/Application.php:89 (Application:runAction())
+/home/emktcom/public_html/chat2/php/app.php:27 (Application:run())
+
+Application path: /php/app.php?install-wizard-2
+2017-05-29 23:46:40 [error] SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)
+Stack trace:
+/home/emktcom/public_html/chat2/php/service/Database.php:49 (Logger:error())
+/home/emktcom/public_html/chat2/php/service/Database.php:67 (Database:connect())
+/home/emktcom/public_html/chat2/php/service/Database.php:28 (Database:reconnect())
+/home/emktcom/public_html/chat2/php/lib/Service.php:17 (Database:onRegister())
+/home/emktcom/public_html/chat2/php/lib/ServiceContainer.php:55 (Service:setServiceContainer())
+/home/emktcom/public_html/chat2/php/lib/Controller.php:33 (ServiceContainer:get())
+/home/emktcom/public_html/chat2/php/controller/InstallController.php:2 (Controller:get())
+/home/emktcom/public_html/chat2/php/app/Application.php:165 (InstallController:wizard2Action())
+/home/emktcom/public_html/chat2/php/app/Application.php:89 (Application:runAction())
+/home/emktcom/public_html/chat2/php/app.php:27 (Application:run())
+
+Application path: /php/app.php?upload-upload
+2017-05-29 23:50:52 fopen(/home/emktcom/public_html/chat2/php/../upload/shared-files/u3Z8Qv0jFOUjP4Om4k8CC8GnMaCuaA0.dat): failed to open stream: Permission denied on line 87 in /home/emktcom/public_html/chat2/php/model/SharedFileModel.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fwrite() expects parameter 1 to be resource, boolean given on line 62 in /home/emktcom/public_html/chat2/php/lib/Utils.php
+2017-05-29 23:50:52 fclose() expects parameter 1 to be resource, boolean given on line 91 in /home/emktcom/public_html/chat2/php/model/SharedFileModel.php
+Application path: /php/app.php?shared-file-download&id=1
+2017-05-29 23:51:00 [error] File does not exist
+Stack trace:
+/home/emktcom/public_html/chat2/php/service/ExceptionHandler.php:23 (Logger:error())
+/home/emktcom/public_html/chat2/php/app/Application.php:180 (ExceptionHandler:createResponse())
+/home/emktcom/public_html/chat2/php/app/Application.php:89 (Application:runAction())
+/home/emktcom/public_html/chat2/php/app.php:27 (Application:run())
+
+Application path: /php/app.php?shared-file-download&id=1
+2017-05-29 23:52:00 [error] File does not exist
+Stack trace:
+/home/emktcom/public_html/chat2/php/service/ExceptionHandler.php:23 (Logger:error())
+/home/emktcom/public_html/chat2/php/app/Application.php:180 (ExceptionHandler:createResponse())
+/home/emktcom/public_html/chat2/php/app/Application.php:89 (Application:runAction())
+/home/emktcom/public_html/chat2/php/app.php:27 (Application:run())
+
+Application path: /php/app.php?shared-file-download&id=1
+2017-05-29 23:52:42 [error] File does not exist
+Stack trace:
+/home/emktcom/public_html/chat2/php/service/ExceptionHandler.php:23 (Logger:error())
+/home/emktcom/public_html/chat2/php/app/Application.php:180 (ExceptionHandler:createResponse())
+/home/emktcom/public_html/chat2/php/app/Application.php:89 (Application:runAction())
+/home/emktcom/public_html/chat2/php/app.php:27 (Application:run())
+
