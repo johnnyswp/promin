@@ -278,10 +278,12 @@ class PagoSeguroController extends Controller
             ->setPayer($payer)
             ->setRedirectUrls($redirect_urls)
             ->setTransactions(array($transaction));
-            dd($payment->create($this->_api_context)->id);exit;  /****/
+           /* dd($payment->create($this->_api_context)->id);exit;  ***/
         try {
             $pago = $payment->create($this->_api_context);
-
+            $pedido = Pedido::find($pedido->id);
+            $pedido->token = $pago->id;
+            $pedido->save();
 
 
         } catch (\PayPal\Exception\PPConnectionException $ex) {
@@ -335,9 +337,14 @@ class PagoSeguroController extends Controller
         $execution->setPayerId($request->get('PayerID'));
         /**Execute the payment **/
         $result = $payment->execute($execution, $this->_api_context);
-        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+
+        /**  dd($result);exit;/** DEBUG RESULT, remove it later **/
         if ($result->getState() == 'approved') { 
-            
+
+            $pedido = Pedido::where('token',$result->id)->first();
+            $pedido->status = 'completado';
+            $pedido->save();
+
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
             \Session::put('success','Payment success');
