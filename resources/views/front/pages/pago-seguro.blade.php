@@ -1,7 +1,9 @@
 @extends('front.layouts.main')
 @section('content')
 <div class="content highlight no_margin_bot">
-
+    <form action="/pago-seguro"  method="post" accept-charset="utf-8">
+        
+   {{ csrf_field() }}  
     <div class="container cart">
         <div class="row text-center">
             <div class="col-md-12">
@@ -11,20 +13,20 @@
          @if(!Auth::check())
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-2">
-                <input type="text" class="form-control custom_in" placeholder="* Nombre">
+                <input name="nombre" type="text" class="form-control custom_in" placeholder="* Nombre">
                 <br>
-                <input type="text" class="form-control custom_in" placeholder="* Teléfono">
+                <input name="telefono" type="text" class="form-control custom_in" placeholder="* Teléfono">
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control custom_in" placeholder="* Apellidos">
+                <input name="apellido" type="text" class="form-control custom_in" placeholder="* Apellidos">
                 <br>
-                <input type="text" class="form-control custom_in" placeholder="* Email">
+                <input name="email" type="text" class="form-control custom_in" placeholder="* Email">
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <br>
                     <label class="checkbox-inline tipo_sm skin-yellow">
-                      <input type="checkbox" id="crear_cuenta" value="crear_cuenta" checked=""> Quiero crear mi cuenta y acepto el <a href="aviso-privacidad.php">Aviso de Privacidad</a> y los <a href="terminos-condiciones-uso.php">Términos y Condiciones de Uso</a>
+                      <input type="checkbox"  name="crear_cuenta" value="1" checked="checked"> Quiero crear mi cuenta y acepto el <a href="/aviso-privacidad">Aviso de Privacidad</a> y los <a href="/terminos-condiciones-uso">Términos y Condiciones de Uso</a>
                     </label>
                 </div>
             </div>
@@ -32,22 +34,14 @@
         @else
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-2">
-                <input type="text" name="user" value="{{Auth::user()->name}}" class="form-control custom_in" placeholder="* Nombre">
+                <input type="text" name="nombre" value="{{Auth::user()->name}}" class="form-control custom_in" placeholder="* Nombre">
                 <br>
-                <input type="text" value="{{Auth::user()->telephone}}" class="form-control custom_in" placeholder="* Teléfono">
+                <input type="text" name="telefono" value="{{Auth::user()->telephone}}" class="form-control custom_in" placeholder="* Teléfono">
             </div>
             <div class="col-md-4">
-                <input type="text" value="{{Auth::user()->parental_name}}"  class="form-control custom_in" placeholder="* Apellidos">
+                <input type="text" name="apellido" value="{{Auth::user()->parental_name}}"  class="form-control custom_in" placeholder="* Apellidos">
                 <br>
-                <input type="text" value="{{Auth::user()->email}}"  class="form-control custom_in" placeholder="* Email">
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <br>
-                    <label class="checkbox-inline tipo_sm skin-yellow">
-                      <input type="checkbox" id="crear_cuenta" value="crear_cuenta" checked=""> Quiero crear mi cuenta y acepto el <a href="aviso-privacidad.php">Aviso de Privacidad</a> y los <a href="terminos-condiciones-uso.php">Términos y Condiciones de Uso</a>
-                    </label>
-                </div>
+                <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control custom_in" placeholder="* Email">
             </div>
         </div>
         @endif
@@ -598,12 +592,12 @@
                         <td>
                             <div class="counting inline-block">
                                 <a href="" class="a-less disabled">-</a>
-                                <input type="text" value="1">
+                                <input type="text" value="{{$cart->qty}}">
                                 <a href="" class="a-more">+</a>
                             </div>
                         </td>
                         <td class="text-right">
-                            <div class="tipo_negra">$ {{number_format($cart->total, 2, '.', ',')}}</div>
+                            <div class="tipo_negra">$ {{number_format($cart->subtotal, 2, '.', ',')}}</div>
                         </td>
                         <td class="text-center">
                             <a href="" class="pclose small tr-remove"><i class="custom-icon custom-icon-close-s"></i></a>
@@ -611,7 +605,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ {{Cart::total()}}</strong></div></td>
+                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ {{Cart::subtotal()}}</strong></div></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -668,14 +662,15 @@
                     <input type="radio" name="inlineRadioOptions" id="forma_pago" value="forma_pago"> <img src="images/icono_conekta.png" alt="Conekta" width="119" height="25" class="m_pago">
                 </label>
                 <br><br>
-                <a href="#" class="btn btn_checkout"><i class="fa fa-check"></i> <strong>Pagar</strong></a>
+
+                <button type="submit" name="enviar" class="btn btn_checkout">
+                    <i class="fa fa-check"></i> <strong>Pagar</strong>
+
+                </button>
             </div>
         </div>
-
-    
-        
-        
     </div>
+    </form>
     <!-- /.container -->
 </div>
 @stop

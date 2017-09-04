@@ -9,7 +9,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado1.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
@@ -21,7 +21,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado2.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
@@ -33,7 +33,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado3.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>                        
                         <h5>
@@ -45,7 +45,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado4.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
@@ -57,7 +57,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado5.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
@@ -69,7 +69,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado6.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
@@ -81,7 +81,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado7.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
@@ -93,7 +93,7 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="images/destacado8.jpg" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>

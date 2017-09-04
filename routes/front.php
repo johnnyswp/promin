@@ -44,12 +44,15 @@ Route::post('/add-cart/{id}','\App\Http\Controllers\Front\ShopingCartController@
 Route::post('/delete-cart/{id}','\App\Http\Controllers\Front\ShopingCartController@deleteCart');
 Route::post('/update-cart/{id}/{val}','\App\Http\Controllers\Front\ShopingCartController@updateCart');
 Route::get('/pago-seguro','\App\Http\Controllers\Front\ShopingCartController@pedidoCart');
+Route::post('/pago-seguro','\App\Http\Controllers\Front\PagoSeguroController@pedidoSave');
 
   ///////////////////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////END SHOPING CART/////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-
+Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => '\App\Http\Controllers\Front\AddMoneyController@payWithPaypal',));
+Route::post('paypal', array('as' => 'addmoney.paypal','uses' => '\App\Http\Controllers\Front\PagoSeguroController@postPaymentWithpaypal',));
+Route::get('paypal', array('as' => 'payment.status','uses' => '\App\Http\Controllers\Front\PagoSeguroController@getPaymentStatus',));
 
 #Rutas de pruebas
 

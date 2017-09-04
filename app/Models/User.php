@@ -187,59 +187,41 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 
     public static function key()
-
     {
-
-
-
         $keygen = new Keygen;
-
-
-
         $alphanum = $keygen->alphanum(15);
-
-
-
         return strtoupper($alphanum->generate());  
-
-        
-
     }
-
-
-
-    
-
-
-
-
 
     public function datoFacturacion()
-
     {
-
          return $this->hasOne('App\Models\Admin\DatoFacturacion');
-
     }
+    public function datoEnvio()
+    {
+         return $this->hasOne('App\Models\Admin\DatoEnvio');
+    }
+
+    public function PedidoDatoFacturacion()
+    {
+         return $this->hasOne('App\Models\Front\PedidoDatoFacturacion');
+    }
+    public function PedidoDatoEnvio()
+    {
+         return $this->hasOne('App\Models\Front\PedidoDatoEnvio');
+    }
+
 
     public function whishlists()
     {
-
          return $this->hasMany('App\Models\Whishlist');
-
     }
 
-
-
-
-
-    public function datoEnvio()
-
+    public function pedidos()
     {
-
-         return $this->hasOne('App\Models\Admin\DatoEnvio');
-
+         return $this->hasMany('App\Models\Front\Pedido');
     }
+
 
     
 
