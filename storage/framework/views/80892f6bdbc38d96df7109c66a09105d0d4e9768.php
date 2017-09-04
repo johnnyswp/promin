@@ -1,5 +1,4 @@
-@extends('front.layouts.main')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="content highlight no_margin_bot">
 
     <div class="container cart">
@@ -8,7 +7,7 @@
                 <h1 class="tipo_naranja"><i class="fa fa-check"></i> Confirma tu pedido</h1>
             </div>
         </div>
-         @if(!Auth::check())
+         <?php if(!Auth::check()): ?>
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-2">
                 <input type="text" class="form-control custom_in" placeholder="* Nombre">
@@ -29,17 +28,17 @@
                 </div>
             </div>
         </div>
-        @else
+        <?php else: ?>
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-2">
-                <input type="text" name="user" value="{{Auth::user()->name}}" class="form-control custom_in" placeholder="* Nombre">
+                <input type="text" name="user" value="<?php echo e(Auth::user()->name); ?>" class="form-control custom_in" placeholder="* Nombre">
                 <br>
-                <input type="text" value="{{Auth::user()->telephone}}" class="form-control custom_in" placeholder="* Teléfono">
+                <input type="text" value="<?php echo e(Auth::user()->telephone); ?>" class="form-control custom_in" placeholder="* Teléfono">
             </div>
             <div class="col-md-4">
-                <input type="text" value="{{Auth::user()->parental_name}}"  class="form-control custom_in" placeholder="* Apellidos">
+                <input type="text" value="<?php echo e(Auth::user()->parental_name); ?>"  class="form-control custom_in" placeholder="* Apellidos">
                 <br>
-                <input type="text" value="{{Auth::user()->email}}"  class="form-control custom_in" placeholder="* Email">
+                <input type="text" value="<?php echo e(Auth::user()->email); ?>"  class="form-control custom_in" placeholder="* Email">
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -50,12 +49,12 @@
                 </div>
             </div>
         </div>
-        @endif
+        <?php endif; ?>
         <div class="row text-center">
             <div class="col-md-12">
                   <a role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_facturacion">
-                        @if(!Auth::check())
+                        <?php if(!Auth::check()): ?>
                             <div class="well">
                             <div class="row">
                                 <div class="col-md-12">
@@ -109,7 +108,7 @@
                                 </div>
                              </div>
                          </div>
-                        @else
+                        <?php else: ?>
                          <div class="well">
 
                                             <div class="row">
@@ -119,17 +118,18 @@
                                                 </div>
                                                 <div class="col-md-4">
 
-                                                    {{Form::text('razon_social',Auth::user()->datoFacturacion->razon_social,['class'=>'form-control custom_in','placeholder'=>'* Nombre o Razón Social']) }}
+                                                    <?php echo e(Form::text('razon_social',Auth::user()->datoFacturacion->razon_social,['class'=>'form-control custom_in','placeholder'=>'* Nombre o Razón Social'])); ?>
 
-                                                    @if ($errors->has('razon_social'))
+
+                                                    <?php if($errors->has('razon_social')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('razon_social') }}</strong>
+                                                            <strong><?php echo e($errors->first('razon_social')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -137,17 +137,18 @@
 
                                                 <div  class="col-md-4">
 
-                                                    {{Form::text('rfc',Auth::user()->datoFacturacion->rfc,['class'=>'form-control custom_in','placeholder'=>'* R.F.C']) }}
+                                                    <?php echo e(Form::text('rfc',Auth::user()->datoFacturacion->rfc,['class'=>'form-control custom_in','placeholder'=>'* R.F.C'])); ?>
 
-                                                    @if ($errors->has('rfc'))
+
+                                                    <?php if($errors->has('rfc')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('rfc') }}</strong>
+                                                            <strong><?php echo e($errors->first('rfc')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -155,19 +156,20 @@
 
                                                 <div class="col-md-2">
 
-                                                    {{Form::text('cp',Auth::user()->datoFacturacion->cp,['class'=>'form-control custom_in','placeholder'=>'* C.P.']) }}
+                                                    <?php echo e(Form::text('cp',Auth::user()->datoFacturacion->cp,['class'=>'form-control custom_in','placeholder'=>'* C.P.'])); ?>
+
 
  
 
-                                                    @if ($errors->has('cp'))
+                                                    <?php if($errors->has('cp')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('cp') }}</strong>
+                                                            <strong><?php echo e($errors->first('cp')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -175,17 +177,18 @@
 
                                                 <div class="col-md-6">
 
-                                                    {{Form::text('calle',Auth::user()->datoFacturacion->calle,['class'=>'form-control custom_in','placeholder'=>'* Calle']) }}
+                                                    <?php echo e(Form::text('calle',Auth::user()->datoFacturacion->calle,['class'=>'form-control custom_in','placeholder'=>'* Calle'])); ?>
 
-                                                    @if ($errors->has('calle'))
+
+                                                    <?php if($errors->has('calle')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('calle') }}</strong>
+                                                            <strong><?php echo e($errors->first('calle')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -195,17 +198,18 @@
 
                                                      
 
-                                                    {{Form::text('n_ext',Auth::user()->datoFacturacion->n_ext,['class'=>'form-control custom_in','placeholder'=>'*  No. Ext'])}}
+                                                    <?php echo e(Form::text('n_ext',Auth::user()->datoFacturacion->n_ext,['class'=>'form-control custom_in','placeholder'=>'*  No. Ext'])); ?>
 
-                                                    @if ($errors->has('n_ext'))
+
+                                                    <?php if($errors->has('n_ext')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('n_ext') }}</strong>
+                                                            <strong><?php echo e($errors->first('n_ext')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -215,17 +219,18 @@
 
 
 
-                                                    {{Form::text('n_int',Auth::user()->datoFacturacion->n_int,['class'=>'form-control custom_in','placeholder'=>'No. Int'])}}
+                                                    <?php echo e(Form::text('n_int',Auth::user()->datoFacturacion->n_int,['class'=>'form-control custom_in','placeholder'=>'No. Int'])); ?>
 
-                                                    @if ($errors->has('n_int'))
+
+                                                    <?php if($errors->has('n_int')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('n_int') }}</strong>
+                                                            <strong><?php echo e($errors->first('n_int')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -233,19 +238,20 @@
 
                                                 <div class="col-md-6">
 
-                                                     {{Form::text('colonia',Auth::user()->datoFacturacion->colonia,['class'=>'form-control custom_in','placeholder'=>'*  Colonia'])}}
+                                                     <?php echo e(Form::text('colonia',Auth::user()->datoFacturacion->colonia,['class'=>'form-control custom_in','placeholder'=>'*  Colonia'])); ?>
 
 
 
-                                                    @if ($errors->has('colonia'))
+
+                                                    <?php if($errors->has('colonia')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('colonia') }}</strong>
+                                                            <strong><?php echo e($errors->first('colonia')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -255,19 +261,20 @@
 
 
 
-                                                     {{Form::text('municipio',Auth::user()->datoFacturacion->municipio,['class'=>'form-control custom_in','placeholder'=>'*  Delegación / Municipio'])}}
+                                                     <?php echo e(Form::text('municipio',Auth::user()->datoFacturacion->municipio,['class'=>'form-control custom_in','placeholder'=>'*  Delegación / Municipio'])); ?>
 
 
 
-                                                    @if ($errors->has('municipio'))
+
+                                                    <?php if($errors->has('municipio')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('municipio') }}</strong>
+                                                            <strong><?php echo e($errors->first('municipio')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -275,17 +282,18 @@
 
                                                 <div class="col-md-6">
 
-                                                    {{Form::text('estado',Auth::user()->datoFacturacion->estado,['class'=>'form-control custom_in','placeholder'=>'*  Estado'])}}
+                                                    <?php echo e(Form::text('estado',Auth::user()->datoFacturacion->estado,['class'=>'form-control custom_in','placeholder'=>'*  Estado'])); ?>
 
-                                                    @if ($errors->has('estado'))
+
+                                                    <?php if($errors->has('estado')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('estado') }}</strong>
+                                                            <strong><?php echo e($errors->first('estado')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -293,21 +301,22 @@
 
                                                 <div class="col-md-6">
 
-                                                    {{Form::text('pais',Auth::user()->datoFacturacion->pais,['class'=>'form-control custom_in','placeholder'=>'*  País'])}}
+                                                    <?php echo e(Form::text('pais',Auth::user()->datoFacturacion->pais,['class'=>'form-control custom_in','placeholder'=>'*  País'])); ?>
+
 
                                                     <!-- por default México-->
 
 
 
-                                                    @if ($errors->has('pais'))
+                                                    <?php if($errors->has('pais')): ?>
 
                                                         <span class="help-block">
 
-                                                            <strong>{{ $errors->first('pais') }}</strong>
+                                                            <strong><?php echo e($errors->first('pais')); ?></strong>
 
                                                         </span>
 
-                                                    @endif
+                                                    <?php endif; ?>
 
                                                     <br>
 
@@ -316,14 +325,14 @@
                                              </div>
 
                                          </div>
-                        @endif
+                        <?php endif; ?>
                     </div>
                 </div>
                 
                 <div class="col-md-12">
                   <a role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_envio">
-                        @if(!Auth::check())
+                        <?php if(!Auth::check()): ?>
                             <div class="well">
                             <div class="row">
                                 <div class="col-md-12">
@@ -369,7 +378,7 @@
                                 </div>
                              </div>
                          </div> 
-                        @else
+                        <?php else: ?>
                          <div class="well">
 
                                                 <div class="row">
@@ -379,11 +388,13 @@
                                                     <div class="col-md-12">
 
                                                         <label class="checkbox-inline">
-                                                    @if(Auth::user()->datoEnvio->activo==1)
-                                                    {{ Form::checkbox('activo', '1', true,['id'=>'dom_factura']) }}
-                                                    @else
-                                                    {{ Form::checkbox('activo', '1', false,['id'=>'dom_factura']) }}
-                                                    @endif
+                                                    <?php if(Auth::user()->datoEnvio->activo==1): ?>
+                                                    <?php echo e(Form::checkbox('activo', '1', true,['id'=>'dom_factura'])); ?>
+
+                                                    <?php else: ?>
+                                                    <?php echo e(Form::checkbox('activo', '1', false,['id'=>'dom_factura'])); ?>
+
+                                                    <?php endif; ?>
                                                            Usar domicilio de factura
 
                                                         </label>
@@ -394,19 +405,20 @@
 
                                                     <div class="col-md-2">
 
-                                                        {{Form::text('cp_2',Auth::user()->datoEnvio->cp,['class'=>'form-control custom_in','placeholder'=>'*  C.P.'])}}
+                                                        <?php echo e(Form::text('cp_2',Auth::user()->datoEnvio->cp,['class'=>'form-control custom_in','placeholder'=>'*  C.P.'])); ?>
 
 
 
-                                                        @if ($errors->has('cp_2'))
+
+                                                        <?php if($errors->has('cp_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('cp_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('cp_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -414,19 +426,20 @@
 
                                                     <div class="col-md-6">
 
-                                                        {{Form::text('calle_2',Auth::user()->datoEnvio->calle,['class'=>'form-control custom_in','placeholder'=>'*  Calle'])}}
+                                                        <?php echo e(Form::text('calle_2',Auth::user()->datoEnvio->calle,['class'=>'form-control custom_in','placeholder'=>'*  Calle'])); ?>
 
 
 
-                                                        @if ($errors->has('calle_2'))
+
+                                                        <?php if($errors->has('calle_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('calle_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('calle_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -434,19 +447,20 @@
 
                                                     <div class="col-md-2">
 
-                                                        {{Form::text('n_ext_2',Auth::user()->datoEnvio->n_ext,['class'=>'form-control custom_in','placeholder'=>'*  No. Ext'])}}
+                                                        <?php echo e(Form::text('n_ext_2',Auth::user()->datoEnvio->n_ext,['class'=>'form-control custom_in','placeholder'=>'*  No. Ext'])); ?>
 
 
 
-                                                        @if ($errors->has('n_ext_2'))
+
+                                                        <?php if($errors->has('n_ext_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('n_ext_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('n_ext_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -454,19 +468,20 @@
 
                                                     <div class="col-md-2">
 
-                                                        {{Form::text('n_int_2',Auth::user()->datoEnvio->n_int,['class'=>'form-control custom_in','placeholder'=>'No. Int'])}}
+                                                        <?php echo e(Form::text('n_int_2',Auth::user()->datoEnvio->n_int,['class'=>'form-control custom_in','placeholder'=>'No. Int'])); ?>
 
 
 
-                                                        @if ($errors->has('n_int_2'))
+
+                                                        <?php if($errors->has('n_int_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('n_int_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('n_int_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -474,19 +489,20 @@
 
                                                     <div class="col-md-6">
 
-                                                        {{Form::text('colonia_2',Auth::user()->datoEnvio->colonia,['class'=>'form-control custom_in','placeholder'=>'*  Colonia'])}}
+                                                        <?php echo e(Form::text('colonia_2',Auth::user()->datoEnvio->colonia,['class'=>'form-control custom_in','placeholder'=>'*  Colonia'])); ?>
 
 
 
-                                                        @if ($errors->has('colonia_2'))
+
+                                                        <?php if($errors->has('colonia_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('colonia_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('colonia_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -494,19 +510,20 @@
 
                                                     <div class="col-md-6">
 
-                                                        {{Form::text('municipio_2',Auth::user()->datoEnvio->municipio,['class'=>'form-control custom_in','placeholder'=>'*  Delegación / Municipio'])}}
+                                                        <?php echo e(Form::text('municipio_2',Auth::user()->datoEnvio->municipio,['class'=>'form-control custom_in','placeholder'=>'*  Delegación / Municipio'])); ?>
 
 
 
-                                                        @if ($errors->has('municipio_2'))
+
+                                                        <?php if($errors->has('municipio_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('municipio_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('municipio_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -514,19 +531,20 @@
 
                                                     <div class="col-md-6">
 
-                                                        {{Form::text('estado_2',Auth::user()->datoEnvio->estado,['class'=>'form-control custom_in','placeholder'=>'*  Estado'])}}
+                                                        <?php echo e(Form::text('estado_2',Auth::user()->datoEnvio->estado,['class'=>'form-control custom_in','placeholder'=>'*  Estado'])); ?>
 
 
 
-                                                        @if ($errors->has('estado_2'))
+
+                                                        <?php if($errors->has('estado_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('estado_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('estado_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -534,19 +552,20 @@
 
                                                     <div class="col-md-6">
 
-                                                        {{Form::text('pais_2',Auth::user()->datoEnvio->pais,['class'=>'form-control custom_in','placeholder'=>'*  País'])}}
+                                                        <?php echo e(Form::text('pais_2',Auth::user()->datoEnvio->pais,['class'=>'form-control custom_in','placeholder'=>'*  País'])); ?>
 
 
 
-                                                        @if ($errors->has('pais_2'))
+
+                                                        <?php if($errors->has('pais_2')): ?>
 
                                                             <span class="help-block">
 
-                                                                <strong>{{ $errors->first('pais_2') }}</strong>
+                                                                <strong><?php echo e($errors->first('pais_2')); ?></strong>
 
                                                             </span>
 
-                                                        @endif
+                                                        <?php endif; ?>
 
                                                         <br>
 
@@ -555,7 +574,7 @@
                                                  </div>
 
                                              </div>
-                        @endif                        
+                        <?php endif; ?>                        
                     </div>
                 </div>
         </div>
@@ -584,16 +603,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                    @foreach(Cart::content() as $cart)
+                    <?php $__currentLoopData = Cart::content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tr>
                         <td class="text-center">
-                            <img src="{{$cart->options->img}}" alt="{{$cart->name}}" class="img-responsive" width="120">
+                            <img src="<?php echo e($cart->options->img); ?>" alt="<?php echo e($cart->name); ?>" class="img-responsive" width="120">
                         </td>
                         <td class="td-descr tipo_negra">
-                            {{$cart->name}}
+                            <?php echo e($cart->name); ?>
+
                         </td>
                         <td class="text-right">
-                            <div class="tipo_negra">$ {{number_format($cart->price, 2, '.', ',')}}</div>
+                            <div class="tipo_negra">$ <?php echo e(number_format($cart->price, 2, '.', ',')); ?></div>
                         </td>
                         <td>
                             <div class="counting inline-block">
@@ -603,15 +623,15 @@
                             </div>
                         </td>
                         <td class="text-right">
-                            <div class="tipo_negra">$ {{number_format($cart->total, 2, '.', ',')}}</div>
+                            <div class="tipo_negra">$ <?php echo e(number_format($cart->total, 2, '.', ',')); ?></div>
                         </td>
                         <td class="text-center">
                             <a href="" class="pclose small tr-remove"><i class="custom-icon custom-icon-close-s"></i></a>
                         </td>
                     </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ {{Cart::total()}}</strong></div></td>
+                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ <?php echo e(Cart::total()); ?></strong></div></td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -638,7 +658,7 @@
                         <a href="producto.php" class="black" title="$NombreProducto $Modelo $Marca">Bomba de Concreto</a>
                         <small>KCP37ZX5170</small>
                     </h5>
-                    <div class="cost">$ {{Cart::total()}}</div>
+                    <div class="cost">$ <?php echo e(Cart::total()); ?></div>
                 </div>
                 
             </div>
@@ -646,7 +666,7 @@
 
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3>Total: ${{Cart::total()}}</h3>
+                <h3>Total: $23,000.00</h3>
                 <h2 class="tipo_naranja"><strong>Forma de Pago</strong></h2>
                 <label class="radio-inline">
                     <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago" checked=""> Pago en Sucursal PROMIN
@@ -678,4 +698,5 @@
     </div>
     <!-- /.container -->
 </div>
-@stop
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('front.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
