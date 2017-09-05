@@ -1,7 +1,16 @@
 @extends('front.layouts.main')
 @section('content')
+<style type="text/css" media="screen">
+    .help-block {
+    color: red!important;
+    font-size: 10px;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+}
+</style>
 <div class="content highlight no_margin_bot">
-    <form action="/pago-seguro"  method="post" accept-charset="utf-8">
+    <form action="/pago-seguro" id="pago" method="post" accept-charset="utf-8">
         
    {{ csrf_field() }}  
     <div class="container cart">
@@ -14,13 +23,33 @@
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-2">
                 <input name="nombre" type="text" class="form-control custom_in" placeholder="* Nombre">
+                @if ($errors->has('nombre'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('nombre') }}</strong>
+                    </span>
+                @endif
                 <br>
                 <input name="telefono" type="text" class="form-control custom_in" placeholder="* Teléfono">
+                @if ($errors->has('telefono'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('telefono') }}</strong>
+                    </span>
+                @endif
             </div>
             <div class="col-md-4">
                 <input name="apellido" type="text" class="form-control custom_in" placeholder="* Apellidos">
+                @if ($errors->has('apellido'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('apellido') }}</strong>
+                    </span>
+                @endif
                 <br>
                 <input name="email" type="text" class="form-control custom_in" placeholder="* Email">
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -35,13 +64,33 @@
         <div class="row text-center">
             <div class="col-md-4 col-md-offset-2">
                 <input type="text" name="nombre" value="{{Auth::user()->name}}" class="form-control custom_in" placeholder="* Nombre">
+                @if ($errors->has('nombre'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('nombre') }}</strong>
+                    </span>
+                @endif
                 <br>
                 <input type="text" name="telefono" value="{{Auth::user()->telephone}}" class="form-control custom_in" placeholder="* Teléfono">
+                @if ($errors->has('telefono'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('telefono') }}</strong>
+                    </span>
+                @endif
             </div>
             <div class="col-md-4">
                 <input type="text" name="apellido" value="{{Auth::user()->parental_name}}"  class="form-control custom_in" placeholder="* Apellidos">
+                @if ($errors->has('apellido'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('apellido') }}</strong>
+                    </span>
+                @endif
                 <br>
                 <input type="text" name="email" value="{{Auth::user()->email}}"  class="form-control custom_in" placeholder="* Email">
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
             </div>
         </div>
         @endif
@@ -58,54 +107,109 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="razon_social" class="form-control custom_in" placeholder="* Nombre o Razón Social">
+                                    @if ($errors->has('razon_social'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('razon_social') }}</strong>
+                                        </span>
+                                    @endif
                                     <br>
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="rfc" class="form-control custom_in" placeholder="* R.F.C.">
+                                    @if ($errors->has('rfc'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('rfc') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="cp" class="form-control custom_in" placeholder="* C.P.">
+                                    @if ($errors->has('cp'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('cp') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="calle" class="form-control custom_in" placeholder="* Calle">
+                                    @if ($errors->has('calle'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('calle') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="n_ext" class="form-control custom_in" placeholder="* No. Ext">
+                                    @if ($errors->has('n_ext'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('n_ext') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="n_int" class="form-control custom_in" placeholder="No. Int">
+                                    @if ($errors->has('n_int'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('n_int') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="colonia" class="form-control custom_in" placeholder="* Colonia">
+                                    @if ($errors->has('colonia'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('colonia') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="municipio" class="form-control custom_in" placeholder="* Delegación / Municipio">
+                                    @if ($errors->has('municipio'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('municipio') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="estado" class="form-control custom_in" placeholder="* Estado">
+                                    @if ($errors->has('estado'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('estado') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input type="text" name="pais" class="form-control custom_in" placeholder="* País"> <!-- por default México-->
+                                    @if ($errors->has('pais'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('pais') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control custom_in" required="" placeholder="0"><!-- si llenan los datos de facturación se debe de capturar este campo, sólo aceptar números-->
+                                    <input type="text" name="last_num" class="form-control custom_in" required="" placeholder="0"><!-- si llenan los datos de facturación se debe de capturar este campo, sólo aceptar números-->
                                     <p class="tipo_sm">Capture los 4 últimos dígitos de su tarjeta o los 18 dígitos de su CLABE.</p>
+                                    @if ($errors->has('last_num'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('last_num') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                              </div>
                          </div>
                         @else
-                         <div class="well">
-
+                        <div class="well">
+            
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <h3>Datos de Facturación</h3>
@@ -331,34 +435,74 @@
                                 </div>
                                 <div class="col-md-2">
                                     <input name="cp_2"  type="text" class="form-control custom_in" placeholder="* C.P.">
+                                    @if ($errors->has('cp_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('cp_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input name="calle_2"  type="text" class="form-control custom_in" placeholder="* Calle">
+                                    @if ($errors->has('calle_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('calle_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-2">
                                     <input name="n_ext_2"  type="text" class="form-control custom_in" placeholder="* No. Ext">
+                                    @if ($errors->has('n_ext_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('n_ext_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-2">
                                     <input name="n_int_2"  type="text" class="form-control custom_in" placeholder="No. Int">
+                                    @if ($errors->has('n_int_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('n_int_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input name="colonia_2"  type="text" class="form-control custom_in" placeholder="* Colonia">
+                                    @if ($errors->has('colonia_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('colonia_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input name="municipio_2"  type="text" class="form-control custom_in" placeholder="* Delegación / Municipio">
+                                    @if ($errors->has('municipio_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('municipio_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input name="estado_2"  type="text" class="form-control custom_in" placeholder="* Estado">
+                                    @if ($errors->has('estado_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('estado_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                                 <div class="col-md-6">
                                     <input name="pais_2"  type="text" class="form-control custom_in" placeholder="* País"> <!-- por default México-->
+                                    @if ($errors->has('pais_2'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('pais_2') }}</strong>
+                                        </span>
+                                    @endif 
                                     <br>
                                 </div>
                              </div>
@@ -663,7 +807,7 @@
                 </label>
                 <br><br>
 
-                <button type="submit" name="enviar" class="btn btn_checkout">
+                <button type="submit" name="enviar" onclick="$('#pago').submit();" class="btn btn_checkout">
                     <i class="fa fa-check"></i> <strong>Pagar</strong>
 
                 </button>

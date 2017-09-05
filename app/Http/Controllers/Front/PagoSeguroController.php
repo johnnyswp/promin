@@ -106,13 +106,14 @@ class PagoSeguroController extends Controller
         ];
 
         $validator = Validator::make($req->all(), $val);
-        if ($validator->fails()) { dd($validator);
+        if ($validator->fails()) { #dd($validator);
             return redirect()->back()
                         ->withErrors($validator)
-                        /*->with('envioF',$eFac)                        
-                        ->with('envioD',$eEnvio)  */                      
                         ->withInput();
 
+                        /*->with('envioF',$eFac)                        
+                        ->with('envioD',$eEnvio)  */                      
+                        
         }
 
         /*User Model */    
@@ -297,13 +298,13 @@ class PagoSeguroController extends Controller
 
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
-                \Session::put('error','Connection timeout');
+                \Session::put('error','El tiempo de conexión expiro');
                 return Redirect::route('addmoney.paywithpaypal');
                 /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
                 /** $err_data = json_decode($ex->getData(), true); **/
                 /** exit; **/
             } else {
-                \Session::put('error','Some error occur, sorry for inconvenient');
+                \Session::put('error','Se produce algún error, lo siento por incómodo');
                 return Redirect::route('addmoney.paywithpaypal');
                 /** die('Some error occur, sorry for inconvenient'); **/
             }
@@ -320,7 +321,7 @@ class PagoSeguroController extends Controller
             /** redirect to paypal **/
             return Redirect::away($redirect_url);
         }
-        \Session::put('error','Unknown error occurred');
+        \Session::put('error','Ha ocurrido un error desconocido');
         return Redirect::route('addmoney.paywithpaypal'); 
     }
 
@@ -333,7 +334,7 @@ class PagoSeguroController extends Controller
         
         Session::forget('paypal_payment_id');
         if (empty($request->get('PayerID')) || empty($request->get('token'))) {
-            \Session::put('error','Payment failed');
+            \Session::put('error','Pago fallido');
             return Redirect::route('addmoney.paywithpaypal');
         }
         
@@ -356,12 +357,12 @@ class PagoSeguroController extends Controller
 
             /** it's all right **/
             /** Here Write your database logic like that insert record or value in database if you want **/
-            \Session::put('success','Payment success');
+            \Session::put('success','Pago exitoso');
 
 
             return Redirect::route('addmoney.paywithpaypal');
         }
-        \Session::put('error','Payment failed');
+        \Session::put('error','Pago fallido ');
         return Redirect::route('addmoney.paywithpaypal');
     }
        
