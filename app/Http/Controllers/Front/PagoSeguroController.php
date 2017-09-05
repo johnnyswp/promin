@@ -123,25 +123,34 @@ class PagoSeguroController extends Controller
         $telephone = $req->get("telefono");
         $crear_cuenta = $req->get("crear_cuenta");
 
-        $user = User::find(Auth::user()->id); 
-        
-        if($user){
 
+        
+        
+        if(Auth::check()){
+            $user = User::find(Auth::user()->id); 
+            $user_id = $user->id;
         }else{
             if($req->get("crear_cuenta")){
-                $user = new User;
-                $user->name             =$name;
-                $user->parental_name    =$parental_name;
-                $user->telephone        =$telephone;
-                $user->email            =$email;
-                $user->save();
+                $email_e = User::where('email',$email)->first();
+                if($email_e){
+                   $user_id = $email_e->id; 
+                }else{
+                    $user = new User;
+                    $user->name             =$name;
+                    $user->parental_name    =$parental_name;
+                    $user->telephone        =$telephone;
+                    $user->email            =$email;
+                    $user->save();
+
+                    $user_id = $user->id;
+                }
             }
         }
 
         /* Pedido Model */
         $pedido = new Pedido;
         $pedido->status = 'En proceso';
-        $pedido->user_id = Auth::user()->id;
+        $pedido->user_id = $user_id;
         $pedido->nombre = $name;
         $pedido->apellido = $parental_name;
         $pedido->email = $email;
