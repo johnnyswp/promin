@@ -17,7 +17,23 @@ class ShopingCartController extends Controller
     public function addCart($id)
     {
         $pro = Producto::findOrFail($id);
+        if($pro->mx != 1){
+            session(['pro_id'=>$id]);
+            $cart = Cart::content();
+            $itemCart = $cart->search(function ($cartItem, $rowId) {
+                return $cartItem->id === intval(session('pro_id'));
+            });
+
+            if($itemCart!==false){
+               $data = Cart::get($itemCart);
+               if($data->qty >= $pro->cantidad){
+                  return "0";
+               }
+            }
+        }
+
         Cart::add(['id'=>$pro->id, 'name'=>$pro->nombre, 'qty'=>1,'price'=>$pro->priceVenta,'options'=>['img' => $pro->image(), 'link'=>url('linea-negocio/'.str_slug($pro->linea()).'/'.str_slug($pro->nombre).'-'.$pro->id)]]);
+
         return view('front.includes.carrito');
     }
 
@@ -29,6 +45,23 @@ class ShopingCartController extends Controller
 
     public function updateCart($id,$val)
     {
+        $cart = Cart::get($id);
+        $pro = Producto::findOrFail($$cart->id);
+        if($pro->mx != 1){
+            session(['pro_id'=>$id]);
+            $cart = Cart::content();
+            $itemCart = $cart->search(function ($cartItem, $rowId) {
+                return $cartItem->id === intval(session('pro_id'));
+            });
+
+            if($itemCart!==false){
+               $data = Cart::get($itemCart);
+               if($data->qty >= $pro->cantidad){
+                  return view('front.includes.carrito')->with('error', '0');
+               }
+            }
+        }
+
         Cart::update($id, $val);
         return view('front.includes.carrito');
     }

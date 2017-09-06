@@ -6,7 +6,12 @@ $('.add-cart').on('click', function(event){
     	type: 'POST',
     	dataType: 'html',
     })
-    .done(function(html) { $('.hcart').html(html); $('#content-cart').css('display','block'); addEvent(); })
+    .done(function(html) { 
+        if(html=="0"){
+            promin.m('success','No hay mas axistencias de este producto');
+            return false;
+        }
+        $('.hcart').html(html); $('#content-cart').css('display','block'); addEvent(); })
     .fail(function() { console.log("error"); })
     .always(function() { console.log("complete"); });
 });

@@ -18,3 +18,10 @@
         <div class="total">Total: <ins>$ {{Cart::subtotal()}}</ins></div>
     </div>
 </div>
+@if(asset($error) and $error == 0)
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        promin.m('success','No hay mas axistencias de este producto');
+    });
+</script>
+@endif
