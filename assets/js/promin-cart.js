@@ -8,7 +8,7 @@ $('.add-cart').on('click', function(event){
     })
     .done(function(html) { 
         if(html=="0"){
-            promin.m('success','No hay mas axistencias de este producto');
+            promin.m('danger','No hay mas axistencias de este producto');
             return false;
         }
         $('.hcart').html(html); $('#content-cart').css('display','block'); addEvent(); })
@@ -39,9 +39,9 @@ function addEvent(){
         $.ajax({
             url: '/update-cart/'+id+'/'+val,
             type: 'POST',
-            dataType: 'html',
+            dataType: 'json',
         })
-        .done(function(html) { $('.hcart').html(html); $('#content-cart').css('display','block'); addEvent(); })
+        .done(function(json) { if(json.error=='1'){ promin.m('danger','No hay mas axistencias de este producto'); } $('.hcart').html(json.html); $('#content-cart').css('display','block'); addEvent(); })
         .fail(function() { console.log("error"); })
         .always(function() { console.log("complete"); });
     });
