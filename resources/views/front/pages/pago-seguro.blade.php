@@ -96,7 +96,7 @@
         @endif
         <div class="row text-center">
             <div class="col-md-12">
-                  <a role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
+                  <a id="envio_" role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_facturacion">
                         @if(!Auth::check())
                             <div class="well">
@@ -115,7 +115,7 @@
                                     <br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rfc" class="form-control custom_in" placeholder="* R.F.C.">
+                                    <input type="text" name="rfc" class="form-control custom_in" value="VECJ880326XXXX" placeholder="* R.F.C.">
                                     @if ($errors->has('rfc'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('rfc') }}</strong>
@@ -197,7 +197,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="last_num" class="form-control custom_in" required="" placeholder="0"><!-- si llenan los datos de facturación se debe de capturar este campo, sólo aceptar números-->
-                                    <p class="tipo_sm">Capture los 4 últimos dígitos de su tarjeta o los 18 dígitos de su CLABE.</p>
+                                    <p class="tipo_sm">Capture los 4 últimos dígitos de su tarjeta o los 18 dígitos de su CLAVE.</p>
                                     @if ($errors->has('last_num'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('last_num') }}</strong>
@@ -419,7 +419,7 @@
                 </div>
                 
                 <div class="col-md-12">
-                  <a role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
+                  <a id="factura_" role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_envio">
                         @if(!Auth::check())
                             <div class="well">
@@ -429,7 +429,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="checkbox-inline">
-                                      <input type="checkbox" id="dom_factura" value="dom_factura" checked=""> Usar domicilio de factura
+                                      <input type="checkbox" id="dom_factura" value="dom_factura"> Usar domicilio de factura
                                     </label>
                                     <br><br>
                                 </div>
@@ -759,7 +759,7 @@
         
         <!-- Productos Relacionados -->
         <div class="container slider related text-center" id="slider-0">
-                        <div class="row">
+            <div class="row">
                 <div class="page-header col-sm-8 col-sm-offset-2">
                     <h2>Productos Relacionados</h2>
                 </div>
@@ -787,27 +787,27 @@
                 <h3>Total: ${{Cart::total()}}</h3>
                 <h2 class="tipo_naranja"><strong>Forma de Pago</strong></h2>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago" checked=""> Pago en Sucursal PROMIN
+                    <input type="radio" id="forma_pago1" value="pago_sucursal" name="forma_pago" checked=""> Pago en Sucursal PROMIN
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago"> Cheque bancario
+                    <input type="radio" id="forma_pago1" value="pago_cheque" name="forma_pago"> Cheque bancario
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago"> Transferencia electrónica
+                    <input type="radio" id="forma_pago1" value="pago_transferencia" name="forma_pago"> Transferencia electrónica
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago" value="forma_pago"> <img src="images/icono_paypal.png" alt="PayPal" width="119" height="31" class="m_pago">
+                    <input type="radio" id="forma_pago" value="pago_paypal" name="forma_pago"> <img src="/assets/images/icono_paypal.png" alt="PayPal" width="119" height="31" class="m_pago">
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago" value="forma_pago"> <img src="images/icono_conekta.png" alt="Conekta" width="119" height="25" class="m_pago">
+                    <input type="radio" id="forma_pago" value="pago_conekta" name="forma_pago"> <img src="/assets/images/icono_conekta.png" alt="Conekta" width="119" height="25" class="m_pago">
                 </label>
                 <br><br>
 
-                <button type="submit" name="enviar" onclick="$('#pago').submit();" class="btn btn_checkout">
+                <button type="submit" name="enviar" id="btn-pago" class="btn btn_checkout">
                     <i class="fa fa-check"></i> <strong>Pagar</strong>
 
                 </button>
@@ -817,4 +817,44 @@
     </form>
     <!-- /.container -->
 </div>
+@stop
+
+@section('js-script')
+<script>
+    $(document).ready(function() {
+        $("#btn-pago").click(function() {
+            var pago = $('input:radio:checked').val();            
+            if(pago=="")
+            $('#pago').submit();
+        });
+
+        $('#dom_factura').on('click', function(){
+            if($(this).prop('checked')){
+                $('input[name=cp_2]').val($('input[name=cp]').val());
+                $('input[name=calle_2]').val($('input[name=calle]').val());
+                $('input[name=n_ext_2]').val($('input[name=n_ext]').val());
+                $('input[name=n_int_2]').val($('input[name=n_int]').val());
+                $('input[name=colonia_2]').val($('input[name=colonia]').val());
+                $('input[name=municipio_2]').val($('input[name=municipio]').val());
+                $('input[name=estado_2]').val($('input[name=estado]').val());
+                $('input[name=pais_2]').val($('input[name=pais]').val());
+            }else{
+                $('input[name=cp_2]').val('');
+                $('input[name=calle_2]').val('');
+                $('input[name=n_ext_2]').val('');
+                $('input[name=n_int_2]').val('');
+                $('input[name=colonia_2]').val('');
+                $('input[name=municipio_2]').val('');
+                $('input[name=estado_2]').val('');
+                $('input[name=pais_2]').val('');
+            }
+        });
+
+        @if ($message = Session::get('open'))
+            $('#envio_').click();
+            $('#factura_').click();
+        @endif
+
+    });
+</script>
 @stop

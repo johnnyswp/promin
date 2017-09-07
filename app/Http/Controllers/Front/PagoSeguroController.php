@@ -69,6 +69,7 @@ class PagoSeguroController extends Controller
 
     public function pedidoSave(Request $req, Response $res)
     {
+        
 
         /*Guardar Pedido*/
         $val = [
@@ -103,15 +104,17 @@ class PagoSeguroController extends Controller
             'colonia_2'     => 'required',
             'municipio_2'   => 'required',
             'estado_2'      => 'required',
+            'pais_2'          =>'required'
+
         ];
 
         $validator = Validator::make($req->all(), $val);
         if ($validator->fails()) { #dd($validator);
             return redirect()->back()
-                        ->withErrors($validator)
+                        ->withErrors($validator)->with('open','si')
                         ->withInput();
-
-                        /*->with('envioF',$eFac)                        
+                        \Session::put('open','si');
+                        /*                        
                         ->with('envioD',$eEnvio)  */                      
                         
         }
@@ -131,31 +134,40 @@ class PagoSeguroController extends Controller
             $user = User::find(Auth::user()->id); 
             $user_id = $user->id;
         }else{
-            if($req->get("crear_cuenta")){
+            #if($req->get("crear_cuenta")){
                 $email_e = User::where('email',$email)->first();
                 if($email_e){
                    $user_id = $email_e->id; 
                 }else{
-                    $user = new User;
-                    $user->name             =$name;
-                    $user->parental_name    =$parental_name;
-                    $user->telephone        =$telephone;
-                    $user->email            =$email;
-                    $user->save();
+                    if($req->get("crear_cuenta")){
+                        $user = new User;
+                        $user->name             =$name;
+                        $user->parental_name    =$parental_name;
+                        $user->telephone        =$telephone;
+                        $user->email            =$email;
+                        $user->save();
 
-                    $user_id = $user->id;
+                        $user_id = $user->id;
+                    }else{
+                        $user_id = '0';
+                        
+                    }
+                   
                 }
-            }
+            #}
         }
-
+        
+        
         /* Pedido Model */
         $pedido = new Pedido;
-        $pedido->status = 'En proceso';
+        $pedido->status = 'Pedido';
         $pedido->user_id = $user_id;
         $pedido->nombre = $name;
         $pedido->apellido = $parental_name;
         $pedido->email = $email;
         $pedido->telefono = $telephone;
+        $pedido->token="-";
+        $pedido->forma_pago =$req->forma_pago;
         $pedido->total = Cart::subtotal();
         $pedido->save();
 
@@ -198,13 +210,6 @@ class PagoSeguroController extends Controller
         $DatoFacturacion->pais =$req->pais;
         $DatoFacturacion->save();
 
-
-
-
-
-
-        
-
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
         
@@ -231,98 +236,96 @@ class PagoSeguroController extends Controller
             $subtotal = $subtotal + $cart->subtotal;
         }
 
-      /**   $item_1 = new Item();
-        $item_1->setName('Item 1')  
-            ->setCurrency('USD')
-            ->setQuantity(1)
-            ->setPrice($request->get('amount')); unit price **/
+        /**   $item_1 = new Item();
+            $item_1->setName('Item 1')  
+                ->setCurrency('USD')
+                ->setQuantity(1)
+                ->setPrice($request->get('amount')); unit price **/
         /* CONTENT SHOP CART */
 
         $item_list = new ItemList();
         $item_list->setItems($items);
 
-        /*$item_list = new ItemList();
-        $item_list->setItems(array($item_1));*/
+        /*
+            $item_list = new ItemList();
+            $item_list->setItems(array($item_1));
+
+            $amount = new Amount();
+            $amount->setCurrency('MXN')
+                   ->setTotal($subtotal);
+        */
+
+        if($req->forma_pago=="pago_paypal"){
+
+            $ship_tax = 0;
+            $ship_cost = 0;
+            $shipping_discount = 0;
+            $details = new Details();
+            $details->setSubtotal($subtotal)
+                    ->setTax($ship_tax)
+                    ->setShipping($ship_cost)
+                    ->setShippingDiscount(- $shipping_discount);
 
 
-
-        /**/
-
-        /*$amount = new Amount();
-        $amount->setCurrency('MXN')
-            ->setTotal($subtotal);*/
-
-        $ship_tax = 0;
-        $ship_cost = 0;
-        $shipping_discount = 0;
-        $details = new Details();
-        $details->setSubtotal($subtotal)
-                ->setTax($ship_tax)
-                ->setShipping($ship_cost)
-                ->setShippingDiscount(- $shipping_discount);
-
-
-        $amount = new Amount();
-        $amount->setCurrency('MXN')
-            ->setDetails($details)
-                ->setTotal($subtotal);
-        
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($item_list)
-            ->setDescription('Your transaction description');
-
+            $amount = new Amount();
+            $amount->setCurrency('MXN')
+                ->setDetails($details)
+                    ->setTotal($subtotal);
             
-        
+            $transaction = new Transaction();
+            $transaction->setAmount($amount)
+                ->setItemList($item_list)
+                ->setDescription('Descripción de su transacción.');
+
+            $redirect_urls = new RedirectUrls();
+            $redirect_urls->setReturnUrl(URL::route('payment.status')) /** Specify return URL **/
+                ->setCancelUrl(URL::route('payment.status'));
 
 
-        
-
-        $redirect_urls = new RedirectUrls();
-        $redirect_urls->setReturnUrl(URL::route('payment.status')) /** Specify return URL **/
-            ->setCancelUrl(URL::route('payment.status'));
-
-
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));
-           /* dd($payment->create($this->_api_context)->id);exit;  ***/
-        try {
-            $pago = $payment->create($this->_api_context);
-            $pedido = Pedido::find($pedido->id);
-            $pedido->token = $pago->id;
-            $pedido->save();
+            $payment = new Payment();
+            $payment->setIntent('Sale')
+                ->setPayer($payer)
+                ->setRedirectUrls($redirect_urls)
+                ->setTransactions(array($transaction));
+               /* dd($payment->create($this->_api_context)->id);exit;  ***/
+            try {
+                $pago = $payment->create($this->_api_context);
+                $pedido = Pedido::find($pedido->id);
+                $pedido->token = $pago->id;
+                $pedido->save();
 
 
-        } catch (\PayPal\Exception\PPConnectionException $ex) {
-            if (\Config::get('app.debug')) {
-                \Session::put('error','El tiempo de conexión expiro');
-                return Redirect::route('addmoney.paywithpaypal');
-                /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
-                /** $err_data = json_decode($ex->getData(), true); **/
-                /** exit; **/
-            } else {
-                \Session::put('error','Se produce algún error, lo siento por incómodo');
-                return Redirect::route('addmoney.paywithpaypal');
-                /** die('Some error occur, sorry for inconvenient'); **/
+            } catch (\PayPal\Exception\PPConnectionException $ex) {
+                if (\Config::get('app.debug')) {
+                    \Session::put('error','El tiempo de conexión expiro');
+                    return Redirect::route('addmoney.paywithpaypal');
+                    /** echo "Exception: " . $ex->getMessage() . PHP_EOL; **/
+                    /** $err_data = json_decode($ex->getData(), true); **/
+                    /** exit; **/
+                } else {
+                    \Session::put('error','Se produjo algún error, lo siento');
+                    return Redirect::route('addmoney.paywithpaypal');
+                    /** die('Some error occur, sorry for inconvenient'); **/
+                }
             }
-        }
-        foreach($payment->getLinks() as $link) {
-            if($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
+            foreach($payment->getLinks() as $link) {
+                if($link->getRel() == 'approval_url') {
+                    $redirect_url = $link->getHref();
+                    break;
+                }
             }
+            /** add payment ID to session **/
+            Session::put('paypal_payment_id', $payment->getId());
+            if(isset($redirect_url)) {
+                /** redirect to paypal **/
+                return Redirect::away($redirect_url);
+            }
+            \Session::put('error','Ha ocurrido un error desconocido');
+            return Redirect::route('addmoney.paywithpaypal'); 
+        }else{
+            \Session::put('success','Su pedido esta en proceso, revisa tu email para ver tu pedido');
+            return Redirect::route('addmoney.paywithpaypal');
         }
-        /** add payment ID to session **/
-        Session::put('paypal_payment_id', $payment->getId());
-        if(isset($redirect_url)) {
-            /** redirect to paypal **/
-            return Redirect::away($redirect_url);
-        }
-        \Session::put('error','Ha ocurrido un error desconocido');
-        return Redirect::route('addmoney.paywithpaypal'); 
     }
 
 

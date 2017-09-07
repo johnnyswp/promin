@@ -114,7 +114,7 @@
                                     <br>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" name="rfc" class="form-control custom_in" placeholder="* R.F.C.">
+                                    <input type="text" name="rfc" class="form-control custom_in" value="VECJ880326XXXX" placeholder="* R.F.C.">
                                     <?php if($errors->has('rfc')): ?>
                                         <span class="help-block">
                                             <strong><?php echo e($errors->first('rfc')); ?></strong>
@@ -438,7 +438,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label class="checkbox-inline">
-                                      <input type="checkbox" id="dom_factura" value="dom_factura" checked=""> Usar domicilio de factura
+                                      <input type="checkbox" id="dom_factura" value="dom_factura"> Usar domicilio de factura
                                     </label>
                                     <br><br>
                                 </div>
@@ -807,27 +807,27 @@
                 <h3>Total: $<?php echo e(Cart::total()); ?></h3>
                 <h2 class="tipo_naranja"><strong>Forma de Pago</strong></h2>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago" checked=""> Pago en Sucursal PROMIN
+                    <input type="radio" id="forma_pago1" value="pago_sucursal" name="forma_pago" checked=""> Pago en Sucursal PROMIN
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago"> Cheque bancario
+                    <input type="radio" id="forma_pago1" value="pago_cheque" name="forma_pago"> Cheque bancario
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago1" value="forma_pago"> Transferencia electrónica
+                    <input type="radio" id="forma_pago1" value="pago_transferencia" name="forma_pago"> Transferencia electrónica
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago" value="forma_pago"> <img src="images/icono_paypal.png" alt="PayPal" width="119" height="31" class="m_pago">
+                    <input type="radio" id="forma_pago" value="pago_paypal" name="forma_pago"> <img src="/assets/images/icono_paypal.png" alt="PayPal" width="119" height="31" class="m_pago">
                 </label>
                 <br>
                 <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" id="forma_pago" value="forma_pago"> <img src="images/icono_conekta.png" alt="Conekta" width="119" height="25" class="m_pago">
+                    <input type="radio" id="forma_pago" value="pago_conekta" name="forma_pago"> <img src="/assets/images/icono_conekta.png" alt="Conekta" width="119" height="25" class="m_pago">
                 </label>
                 <br><br>
 
-                <button type="submit" name="enviar" onclick="$('#pago').submit();" class="btn btn_checkout">
+                <button type="submit" name="enviar" id="btn-pago" class="btn btn_checkout">
                     <i class="fa fa-check"></i> <strong>Pagar</strong>
 
                 </button>
@@ -838,4 +838,40 @@
     <!-- /.container -->
 </div>
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('js-script'); ?>
+<script>
+    $(document).ready(function() {
+        $("#btn-pago").click(function() {
+            var pago = $('input:radio:checked').val();            
+            if(pago=="")
+            $('#pago').submit();
+        });
+        
+        $('#dom_factura').on('click', function(){
+            if($(this).prop('checked')){
+                $('input[name=cp_2]').val($('input[name=cp]').val());
+                $('input[name=calle_2]').val($('input[name=calle]').val());
+                $('input[name=n_ext_2]').val($('input[name=n_ext]').val());
+                $('input[name=n_int_2]').val($('input[name=n_int]').val());
+                $('input[name=colonia_2]').val($('input[name=colonia]').val());
+                $('input[name=municipio_2]').val($('input[name=municipio]').val());
+                $('input[name=estado_2]').val($('input[name=estado]').val());
+                $('input[name=pais_2]').val($('input[name=pais]').val());
+            }else{
+                $('input[name=cp_2]').val('');
+                $('input[name=calle_2]').val('');
+                $('input[name=n_ext_2]').val('');
+                $('input[name=n_int_2]').val('');
+                $('input[name=colonia_2]').val('');
+                $('input[name=municipio_2]').val('');
+                $('input[name=estado_2]').val('');
+                $('input[name=pais_2]').val('');
+            }
+        });
+
+    });
+</script>
+<?php $__env->stopSection(); ?>
+
 <?php echo $__env->make('front.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
