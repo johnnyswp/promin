@@ -95,7 +95,7 @@
         <?php endif; ?>
         <div class="row text-center">
             <div class="col-md-12">
-                  <a role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
+                  <a id="envio_" role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_facturacion">
                         <?php if(!Auth::check()): ?>
                             <div class="well">
@@ -196,7 +196,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="text" name="last_num" class="form-control custom_in" required="" placeholder="0"><!-- si llenan los datos de facturación se debe de capturar este campo, sólo aceptar números-->
-                                    <p class="tipo_sm">Capture los 4 últimos dígitos de su tarjeta o los 18 dígitos de su CLABE.</p>
+                                    <p class="tipo_sm">Capture los 4 últimos dígitos de su tarjeta o los 18 dígitos de su CLAVE.</p>
                                     <?php if($errors->has('last_num')): ?>
                                         <span class="help-block">
                                             <strong><?php echo e($errors->first('last_num')); ?></strong>
@@ -428,7 +428,7 @@
                 </div>
                 
                 <div class="col-md-12">
-                  <a role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
+                  <a id="factura_" role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_envio">
                         <?php if(!Auth::check()): ?>
                             <div class="well">
@@ -779,7 +779,7 @@
         
         <!-- Productos Relacionados -->
         <div class="container slider related text-center" id="slider-0">
-                        <div class="row">
+            <div class="row">
                 <div class="page-header col-sm-8 col-sm-offset-2">
                     <h2>Productos Relacionados</h2>
                 </div>
@@ -847,7 +847,7 @@
             if(pago=="")
             $('#pago').submit();
         });
-        
+
         $('#dom_factura').on('click', function(){
             if($(this).prop('checked')){
                 $('input[name=cp_2]').val($('input[name=cp]').val());
@@ -869,6 +869,12 @@
                 $('input[name=pais_2]').val('');
             }
         });
+
+        <?php if($message = Session::get('open')): ?>
+            $('#envio_').click();
+            $('#factura_').click();
+             <?php Session::forget('open'); ?>
+        <?php endif; ?>
 
     });
 </script>

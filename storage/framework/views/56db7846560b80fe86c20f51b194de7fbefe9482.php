@@ -1,17 +1,8 @@
 <div class="content highlight no_margin_bot">
-
-
-
         <div class="container cart">
-
             <div class="row">
-
                 <div class="col-md-12">
-
                     <h1>¡Bienvenido  <?php echo e(Auth::user()->name); ?>!</h1>
-                    <code>
-                       
-                    </code>
                 </div>
 
 
@@ -87,7 +78,6 @@
                                     <input type="hidden" id="picture" name="picture">
                                     <input type="hidden" id="dEnvio" name="dEnvio" value="0">
                                     <input type="hidden" id="dFacturacion" name="dFacturacion" value="0">
-
 
                                     <?php echo e(Form::text('name',Auth::user()->name,['class'=>'form-control custom_in','placeholder'=>'* Nombre'])); ?>
 
@@ -318,8 +308,6 @@
 
                                                 <div class="col-md-2">
 
-
-
                                                     <?php echo e(Form::text('n_int',Auth::user()->datoFacturacion->n_int,['class'=>'form-control custom_in','placeholder'=>'No. Int'])); ?>
 
 
@@ -440,13 +428,13 @@
                                                     <div class="col-md-12">
 
                                                         <label class="checkbox-inline">
-                                                    <?php if(Auth::user()->datoEnvio->activo==1): ?>
-                                                    <?php echo e(Form::checkbox('activo', '1', true,['id'=>'dom_factura'])); ?>
+                                                            <?php if(Auth::user()->datoEnvio->activo==1): ?>
+                                                            <?php echo e(Form::checkbox('activo', '1', true,['id'=>'dom_factura'])); ?>
 
-                                                    <?php else: ?>
-                                                    <?php echo e(Form::checkbox('activo', '1', false,['id'=>'dom_factura'])); ?>
+                                                            <?php else: ?>
+                                                            <?php echo e(Form::checkbox('activo', '1', false,['id'=>'dom_factura'])); ?>
 
-                                                    <?php endif; ?>
+                                                            <?php endif; ?>
                                                            Usar domicilio de factura
 
                                                         </label>
@@ -748,376 +736,59 @@
                               </thead>
 
                               <tbody>
+                              <?php $__currentLoopData = $pedidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pe): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
+                                <?php $pp = App\Models\Front\Pedido::detalle($pe); ?>  
+                              
                                 <tr>
-
-                                  <td>17-mar-2017</td>
-
-                                  <td>3</td>
-
-                                  <td align="right">$40,000.00</td>
-
-
-
-                                  <td class="text-center">
-
-                                    <a role="button" data-toggle="collapse" href="#pedido3" aria-expanded="false" aria-controls="pedido3" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
-
-                                    <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn_tabs_eliminar"><i class="fa fa-remove"></i></a>
-
-                                  </td>
-
+                                    <td><?php echo e($pp->get('fecha')); ?></td>
+                                    <td><?php echo e($pp->get('id')); ?></td>
+                                    <td align="right">$<?php echo e($pp->get('total')); ?></td>
+                                    <td class="text-center">
+                                        <a role="button" data-toggle="collapse" href="#pedido<?php echo e($pp->get('id')); ?>" aria-expanded="false" aria-controls="pedido<?php echo e($pp->get('id')); ?>" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
+                                        <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn_tabs_eliminar"><i class="fa fa-remove"></i></a>
+                                    </td>
                                 </tr>
-
-                                
-
                                 <!-- Detalle Pedido -->
-
                                 <tr>
-
                                   <td colspan="4">
-
-                                    <div class="collapse" id="pedido3" aria-expanded="false" style="height: 0px;">
-
+                                    <div class="collapse" id="pedido<?php echo e($pp->get('id')); ?>" aria-expanded="false" style="height: 0px;">
                                       <div class="well">
-
                                         <h3>Detalle de Pedido 3</h3>
-
                                          <div class="table-responsive">
-
                                             <table class="table table-hover">
-
                                               <thead>
-
                                                 <tr>
-
                                                   <th>Cantidad</th>
-
                                                   <th>Imagen</th>
-
                                                   <th>Descripción</th>
-
                                                   <th>Precio Unit.</th>
-
                                                   <th class="text-right">Sub Total</th>
-
                                                 </tr>
-
                                               </thead>
-
                                               <tbody>
-
+                                              <?php $__currentLoopData = $pp->get('detalles'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $de): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-
                                                   <td>1</td>
-
-                                                  <td><img src="/assets/images/bomba_contreto_kcp_2_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1KCP-545 Bomba de Concreto</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                  <td align="right">$2,200.00</td>
-
+                                                  <td><img src="http://dev.promin.mx/<?php echo e($de['imagen']); ?>" class="img-thumbnail"></td>
+                                                  <td><?php echo e($de['nombre']); ?></td>
+                                                  <td align="right">$<?php echo e($de['precio']); ?></td>
+                                                  <td align="right">$<?php echo e($de['subtotal']); ?></td>
                                                 </tr>
-
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-
-                                                  <td>2</td>
-
-                                                  <td><img src="/assets/images/cargador_john_deere_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1JD-3KF Cargador</td>
-
-                                                  <td align="right">$9,000.00</td>
-
-                                                  <td align="right">$18,000.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/minicargador-caterpillar-216b_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1CA-216B Mini Cargador</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
                                                   <td colspan="4" align="right" valign="bottom"><h4><strong>Total:</strong></h4></td>
-
-                                                  <td align="right"><h3><strong>$23,000.00</strong></h3></td>
-
+                                                  <td align="right"><h3><strong>$ <?php echo e($pp->get('total')); ?></strong></h3></td>
                                                 </tr>
-
                                               </tbody>
-
                                             </table>
-
                                           </div>
-
                                       </div>
-
                                     </div>
-
                                   </td>
-
                                 </tr>
-
-                                
-
-                                <tr>
-
-                                  <td>15-mar-2017</td>
-
-                                  <td>2</td>
-
-                                  <td align="right">$40,000.00</td>
-
-
-
-                                  <td class="text-center">
-
-                                    <a role="button" data-toggle="collapse" href="#pedido2" aria-expanded="false" aria-controls="pedido2" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
-
-                                    <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn_tabs_eliminar"><i class="fa fa-remove"></i></a>
-
-                                  </td>
-
-                                </tr>
-
-
-
-                                <!-- Detalle Pedido -->
-
-                                <tr>
-
-                                  <td colspan="4">
-
-                                    <div class="collapse" id="pedido2" aria-expanded="false" style="height: 0px;">
-
-                                      <div class="well">
-
-                                        <h3>Detalle de Pedido 2</h3>
-
-                                         <div class="table-responsive">
-
-                                            <table class="table table-hover">
-
-                                              <thead>
-
-                                                <tr>
-
-                                                  <th>Cantidad</th>
-
-                                                  <th>Imagen</th>
-
-                                                  <th>Descripción</th>
-
-                                                  <th>Precio Unit.</th>
-
-                                                  <th class="text-right">Sub Total</th>
-
-                                                </tr>
-
-                                              </thead>
-
-                                              <tbody>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/bomba_contreto_kcp_2_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1KCP-545 Bomba de Concreto</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>2</td>
-
-                                                  <td><img src="/assets/images/cargador_john_deere_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1JD-3KF Cargador</td>
-
-                                                  <td align="right">$9,000.00</td>
-
-                                                  <td align="right">$18,000.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/minicargador-caterpillar-216b_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1CA-216B Mini Cargador</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td colspan="4" align="right" valign="bottom"><h4><strong>Total:</strong></h4></td>
-
-                                                  <td align="right"><h3><strong>$23,000.00</strong></h3></td>
-
-                                                </tr>
-
-                                              </tbody>
-
-                                            </table>
-
-                                          </div>
-
-                                      </div>
-
-                                    </div>
-
-                                  </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                  <td>12-feb-2017</td>
-
-                                  <td>1</td>
-
-                                  <td align="right">$40,000.00</td>
-
-
-
-                                  <td class="text-center">
-
-                                    <a role="button" data-toggle="collapse" href="#pedido1" aria-expanded="false" aria-controls="pedido1" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
-
-                                    <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn_tabs_eliminar"><i class="fa fa-remove"></i></a>
-
-                                  </td>
-
-                                </tr>
-
-
-
-                                <!-- Detalle Pedido -->
-
-                                <tr>
-
-                                  <td colspan="4">
-
-                                    <div class="collapse" id="pedido1" aria-expanded="false" style="height: 0px;">
-
-                                      <div class="well">
-
-                                        <h3>Detalle de Pedido 1</h3>
-
-                                         <div class="table-responsive">
-
-                                            <table class="table table-hover">
-
-                                              <thead>
-
-                                                <tr>
-
-                                                  <th>Cantidad</th>
-
-                                                  <th>Imagen</th>
-
-                                                  <th>Descripción</th>
-
-                                                  <th>Precio Unit.</th>
-
-                                                  <th class="text-right">Sub Total</th>
-
-                                                </tr>
-
-                                              </thead>
-
-                                              <tbody>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/bomba_contreto_kcp_2_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1KCP-545 Bomba de Concreto</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>2</td>
-
-                                                  <td><img src="/assets/images/cargador_john_deere_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1JD-3KF Cargador</td>
-
-                                                  <td align="right">$9,000.00</td>
-
-                                                  <td align="right">$18,000.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/minicargador-caterpillar-216b_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1CA-216B Mini Cargador</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td colspan="4" align="right" valign="bottom"><h4><strong>Total:</strong></h4></td>
-
-                                                  <td align="right"><h3><strong>$23,000.00</strong></h3></td>
-
-                                                </tr>
-
-                                              </tbody>
-
-                                            </table>
-
-                                          </div>
-
-                                      </div>
-
-                                    </div>
-
-                                  </td>
-
-                                </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+ 
 
 
                               </tbody>
@@ -1133,10 +804,6 @@
                     </div>
 
                     <!-- FIN MI PEDIDOS-->
-
-
-
-
 
                     <div role="tabpanel" class="tab-pane fade in" id="compras">
 
@@ -1165,370 +832,58 @@
                               </thead>
 
                               <tbody>
-
+                              <?php $__currentLoopData = $pedidos2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pe): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $pp = App\Models\Front\Pedido::detalle($pe); ?>                                
                                 <tr>
-
-                                  <td>2-mar-2017</td>
-
-                                  <td>13</td>
-
-                                  <td align="right">$40,000.00</td>
-
-
-
-                                  <td class="text-center">
-
-                                    <a role="button" data-toggle="collapse" href="#pedido13" aria-expanded="false" aria-controls="pedido13" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
-
-                                  </td>
-
+                                    <td><?php echo e($pp->get('fecha')); ?></td>
+                                    <td><?php echo e($pp->get('id')); ?></td>
+                                    <td align="right">$<?php echo e($pp->get('total')); ?></td>
+                                    <td class="text-center">
+                                        <a role="button" data-toggle="collapse" href="#pedido_<?php echo e($pp->get('id')); ?>" aria-expanded="false" aria-controls="pedido_<?php echo e($pp->get('id')); ?>" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
+                                        <a data-toggle="modal" data-target="#myModal" class="btn btn-sm btn_tabs_eliminar"><i class="fa fa-remove"></i></a>
+                                    </td>
                                 </tr>
-
-                                
-
                                 <!-- Detalle Pedido -->
-
                                 <tr>
-
                                   <td colspan="4">
-
-                                    <div class="collapse" id="pedido13" aria-expanded="false" style="height: 0px;">
-
+                                    <div class="collapse" id="pedido_<?php echo e($pp->get('id')); ?>" aria-expanded="false" style="height: 0px;">
                                       <div class="well">
-
-                                        <h3>Detalle de Pedido 13</h3>
-
+                                        <h3>Detalle de Pedido 3</h3>
                                          <div class="table-responsive">
-
                                             <table class="table table-hover">
-
                                               <thead>
-
                                                 <tr>
-
                                                   <th>Cantidad</th>
-
                                                   <th>Imagen</th>
-
                                                   <th>Descripción</th>
-
                                                   <th>Precio Unit.</th>
-
                                                   <th class="text-right">Sub Total</th>
-
                                                 </tr>
-
                                               </thead>
-
                                               <tbody>
-
+                                              <?php $__currentLoopData = $pp->get('detalles'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $de): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-
                                                   <td>1</td>
-
-                                                  <td><img src="/assets/images/bomba_contreto_kcp_2_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1KCP-545 Bomba de Concreto</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                  <td align="right">$2,200.00</td>
-
+                                                  <td><img src="http://dev.promin.mx/<?php echo e($de['imagen']); ?>" class="img-thumbnail"></td>
+                                                  <td><?php echo e($de['nombre']); ?></td>
+                                                  <td align="right">$<?php echo e($de['precio']); ?></td>
+                                                  <td align="right">$<?php echo e($de['subtotal']); ?></td>
                                                 </tr>
-
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                 <tr>
-
-                                                  <td>2</td>
-
-                                                  <td><img src="/assets/images/cargador_john_deere_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1JD-3KF Cargador</td>
-
-                                                  <td align="right">$9,000.00</td>
-
-                                                  <td align="right">$18,000.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/minicargador-caterpillar-216b_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1CA-216B Mini Cargador</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
                                                   <td colspan="4" align="right" valign="bottom"><h4><strong>Total:</strong></h4></td>
-
-                                                  <td align="right"><h3><strong>$23,000.00</strong></h3></td>
-
+                                                  <td align="right"><h3><strong>$<?php echo e($pp->get('total')); ?></strong></h3></td>
                                                 </tr>
-
                                               </tbody>
-
                                             </table>
-
                                           </div>
-
                                       </div>
-
                                     </div>
-
                                   </td>
-
                                 </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+ 
 
-                                
-
-                                <tr>
-
-                                  <td>28-feb-2017</td>
-
-                                  <td>12</td>
-
-                                  <td align="right">$40,000.00</td>
-
-
-
-                                  <td class="text-center">
-
-                                    <a role="button" data-toggle="collapse" href="#pedido12" aria-expanded="false" aria-controls="pedido12" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
-
-                                  </td>
-
-                                </tr>
-
-
-
-                                <!-- Detalle Pedido -->
-
-                                <tr>
-
-                                  <td colspan="4">
-
-                                    <div class="collapse" id="pedido12" aria-expanded="false" style="height: 0px;">
-
-                                      <div class="well">
-
-                                        <h3>Detalle de Pedido 12</h3>
-
-                                         <div class="table-responsive">
-
-                                            <table class="table table-hover">
-
-                                              <thead>
-
-                                                <tr>
-
-                                                  <th>Cantidad</th>
-
-                                                  <th>Imagen</th>
-
-                                                  <th>Descripción</th>
-
-                                                  <th>Precio Unit.</th>
-
-                                                  <th class="text-right">Sub Total</th>
-
-                                                </tr>
-
-                                              </thead>
-
-                                              <tbody>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/bomba_contreto_kcp_2_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1KCP-545 Bomba de Concreto</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>2</td>
-
-                                                  <td><img src="/assets/images/cargador_john_deere_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1JD-3KF Cargador</td>
-
-                                                  <td align="right">$9,000.00</td>
-
-                                                  <td align="right">$18,000.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/minicargador-caterpillar-216b_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1CA-216B Mini Cargador</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td colspan="4" align="right" valign="bottom"><h4><strong>Total:</strong></h4></td>
-
-                                                  <td align="right"><h3><strong>$23,000.00</strong></h3></td>
-
-                                                </tr>
-
-                                              </tbody>
-
-                                            </table>
-
-                                          </div>
-
-                                      </div>
-
-                                    </div>
-
-                                  </td>
-
-                                </tr>
-
-
-
-                                <tr>
-
-                                  <td>12-mar-2017</td>
-
-                                  <td>10</td>
-
-                                  <td align="right">$40,000.00</td>
-
-
-
-                                  <td class="text-center">
-
-                                    <a role="button" data-toggle="collapse" href="#pedido10" aria-expanded="false" aria-controls="pedido10" class="btn btn-sm btn_tabs_ver collapsed"><i class="fa fa-search"></i></a>
-
-                                  </td>
-
-                                </tr>
-
-
-
-                                <!-- Detalle Pedido -->
-
-                                <tr>
-
-                                  <td colspan="4">
-
-                                    <div class="collapse" id="pedido10" aria-expanded="false" style="height: 0px;">
-
-                                      <div class="well">
-
-                                        <h3>Detalle de Pedido 10</h3>
-
-                                         <div class="table-responsive">
-
-                                            <table class="table table-hover">
-
-                                              <thead>
-
-                                                <tr>
-
-                                                  <th>Cantidad</th>
-
-                                                  <th>Imagen</th>
-
-                                                  <th>Descripción</th>
-
-                                                  <th>Precio Unit.</th>
-
-                                                  <th class="text-right">Sub Total</th>
-
-                                                </tr>
-
-                                              </thead>
-
-                                              <tbody>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/bomba_contreto_kcp_2_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1KCP-545 Bomba de Concreto</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                  <td align="right">$2,200.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>2</td>
-
-                                                  <td><img src="/assets/images/cargador_john_deere_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1JD-3KF Cargador</td>
-
-                                                  <td align="right">$9,000.00</td>
-
-                                                  <td align="right">$18,000.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td>1</td>
-
-                                                  <td><img src="/assets/images/minicargador-caterpillar-216b_thumb.jpg" alt="$TipoProducto" class="img-thumbnail"></td>
-
-                                                  <td>1CA-216B Mini Cargador</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                  <td align="right">$2,800.00</td>
-
-                                                </tr>
-
-                                                <tr>
-
-                                                  <td colspan="4" align="right" valign="bottom"><h4><strong>Total:</strong></h4></td>
-
-                                                  <td align="right"><h3><strong>$23,000.00</strong></h3></td>
-
-                                                </tr>
-
-                                              </tbody>
-
-                                            </table>
-
-                                          </div>
-
-                                      </div>
-
-                                    </div>
-
-                                  </td>
-
-                                </tr>
 
                               </tbody>
 

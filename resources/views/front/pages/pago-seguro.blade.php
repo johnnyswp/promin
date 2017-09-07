@@ -853,6 +853,7 @@
         @if ($message = Session::get('open'))
             $('#envio_').click();
             $('#factura_').click();
+             <?php Session::forget('open'); ?>
         @endif
 
     });

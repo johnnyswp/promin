@@ -20,19 +20,16 @@ use App\Models\Front\PedidoDatoEnvio;
 
 use DB,Cart;
 use Validator,Redirect;
-
 use Auth;
-
 use Hash;
-
-
-
-
-
-
 use URL;
 use Session;
 use Input;
+
+#Mail
+use App\Mail\PedidoSend;
+use Illuminate\Support\Facades\Mail;
+
 /** All Paypal Details class **/
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
@@ -254,6 +251,7 @@ class PagoSeguroController extends Controller
             $amount->setCurrency('MXN')
                    ->setTotal($subtotal);
         */
+        
 
         if($req->forma_pago=="pago_paypal"){
 
@@ -293,7 +291,8 @@ class PagoSeguroController extends Controller
                 $pedido = Pedido::find($pedido->id);
                 $pedido->token = $pago->id;
                 $pedido->save();
-
+                \Session::put('pedido_id',$pedido->id);
+                \Session::put('email',$email);
 
             } catch (\PayPal\Exception\PPConnectionException $ex) {
                 if (\Config::get('app.debug')) {
@@ -323,6 +322,9 @@ class PagoSeguroController extends Controller
             \Session::put('error','Ha ocurrido un error desconocido');
             return Redirect::route('addmoney.paywithpaypal'); 
         }else{
+            Mail::to($email)->send(new PedidoSend($pedido->id)); 
+
+            
             \Session::put('success','Su pedido esta en proceso, revisa tu email para ver tu pedido');
             return Redirect::route('addmoney.paywithpaypal');
         }
@@ -362,9 +364,15 @@ class PagoSeguroController extends Controller
             /** Here Write your database logic like that insert record or value in database if you want **/
             \Session::put('success','Pago exitoso');
 
+            $pedido_id = \Session::get('pedido_id');
+            $email = \Session::get('email');
+
+            Mail::to($email)->send(new PedidoSend($pedido_id)); 
 
             return Redirect::route('addmoney.paywithpaypal');
         }
+        /* Aqui envio de email de cancelacion*/
+        #  Mail::to($email)->send(new PedidoSend($pedido_id)); 
         \Session::put('error','Pago fallido ');
         return Redirect::route('addmoney.paywithpaypal');
     }
