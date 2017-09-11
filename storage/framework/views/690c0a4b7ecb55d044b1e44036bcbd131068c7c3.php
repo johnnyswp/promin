@@ -134,20 +134,23 @@
                 </div>
             </div>
             <div class="row text-center">
-            
+                <?php $__currentLoopData = $relacionados; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $producto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-3 col-sm-6 citem">
-                    <div class="cimg">
-                        <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="/assets/images/img_producto_demo_4.jpg" alt="$NombreProducto $Marca $Modelo"></a>
-                        <a href="" class="btn btn-primary add-cart"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                        <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
+                    <div class="cimg" style="min-height: 200px; max-height: 200px;">
+                        <a href="<?php echo e(url('linea-negocio/'.str_slug($producto->linea()).'/'.str_slug($producto->nombre).'-'.$producto->id)); ?>" class="aimg" title="<?php echo e($producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()); ?>"><img src="<?php echo e($producto->image()); ?>" alt="<?php echo e($producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()); ?>"></a>
+                        <a href="#" class="btn btn-primary add-cart" id="<?php echo e($producto->id); ?>"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                        <a href="#whish" class="btn btn2 whish " producto='<?php echo e($producto->id); ?>'><i class="fa fa-heart corazon"></i></a>
+
                     </div>
                     <h5>
-                        <a href="producto.php" class="black" title="$NombreProducto $Modelo $Marca">Bomba de Concreto</a>
-                        <small>KCP37ZX5170</small>
+                        <a href="<?php echo e(url('linea-negocio/'.str_slug($producto->linea()).'/'.str_slug($producto->nombre).'-'.$producto->id)); ?>" class="black" title="<?php echo e($producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()); ?>"><?php echo e($producto->nombre); ?></a>
+                        <small><?php echo e($producto->modelo()); ?></small>
                     </h5>
-                    <div class="cost">$ 2,000.00</div>
-                </div>
+                    
+                    <div class="cost">$ <?php echo e(number_format($producto->priceVenta, 2, '.', ',')); ?></div>
                 
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
 

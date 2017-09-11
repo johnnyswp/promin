@@ -104,8 +104,8 @@ class ShopingCartController extends Controller
     {
         $error = "0";
         $qty = $val;
-        if($val<=0){
-            $error = "1";
+        if($val<0){
+            $error = "4";
             $qty = 0;
         }else{
             $pro = Producto::findOrFail($id);

@@ -134,20 +134,23 @@
                 </div>
             </div>
             <div class="row text-center">
-            
+                @foreach($relacionados as $producto)
                 <div class="col-md-3 col-sm-6 citem">
-                    <div class="cimg">
-                        <a href="producto.php" class="aimg" title="$NombreProducto $Modelo $Marca"><img src="/assets/images/img_producto_demo_4.jpg" alt="$NombreProducto $Marca $Modelo"></a>
-                        <a href="" class="btn btn-primary add-cart"><i class="fa fa-shopping-cart"></i> Agregar</a>
-                        <a href="" class="btn btn2"><i class="fa fa-heart corazon"></i></a>
+                    <div class="cimg" style="min-height: 200px; max-height: 200px;">
+                        <a href="{{url('linea-negocio/'.str_slug($producto->linea()).'/'.str_slug($producto->nombre).'-'.$producto->id)}}" class="aimg" title="{{$producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()}}"><img src="{{$producto->image()}}" alt="{{$producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()}}"></a>
+                        <a href="#" class="btn btn-primary add-cart" id="{{$producto->id}}"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                        <a href="#whish" class="btn btn2 whish " producto='{{$producto->id}}'><i class="fa fa-heart corazon"></i></a>
+
                     </div>
                     <h5>
-                        <a href="producto.php" class="black" title="$NombreProducto $Modelo $Marca">Bomba de Concreto</a>
-                        <small>KCP37ZX5170</small>
+                        <a href="{{url('linea-negocio/'.str_slug($producto->linea()).'/'.str_slug($producto->nombre).'-'.$producto->id)}}" class="black" title="{{$producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()}}">{{$producto->nombre}}</a>
+                        <small>{{$producto->modelo()}}</small>
                     </h5>
-                    <div class="cost">$ 2,000.00</div>
-                </div>
+                    
+                    <div class="cost">$ {{number_format($producto->priceVenta, 2, '.', ',')}}</div>
                 
+                </div>
+                @endforeach
             </div>
         </div>
 

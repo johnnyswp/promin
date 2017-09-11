@@ -212,6 +212,8 @@ class HomeController extends Controller
     {
         $producto_id = array_reverse(explode('-',$producto))[0];
         $producto = Producto::find($producto_id);
+
+        $relacionados = Producto::where('linea_negocio_id', $producto->linea_negocio_id)->where('id', '!=', $producto->id)->orderBy('tipo_producto_id', 'ASC')->get();
      
         session(['pro_id'=>$producto_id]);
         $cart = Cart::content();
@@ -226,7 +228,7 @@ class HomeController extends Controller
            $qty = $data->qty;
         }
         
-        return view('front.pages.producto')->with(['producto'=>$producto,'rowId'=>$rowId,'qty'=>$qty,'carousel'=>false]);
+        return view('front.pages.producto')->with(['relacionados'=>$relacionados,'producto'=>$producto,'rowId'=>$rowId,'qty'=>$qty,'carousel'=>false]);
     }
 
     public function getNoticias(Request $req)
