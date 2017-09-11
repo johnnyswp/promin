@@ -143,8 +143,6 @@ class DashboardController extends Controller
 
             }
             
-            
-            
             return view('admin.pages.dashboard.index')->with(['pedidos'=>$pedidos]);
 
         /*
