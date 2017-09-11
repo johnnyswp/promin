@@ -14,13 +14,13 @@
                     <ol class="breadcrumb">
                         <li><a href="index.php"><i class="fa fa-home"></i> Inicio</a></li>
                         <li><i class="fa fa-angle-right"></i></li>
-                        <li><a href="{{url('linea-negocio/'.str_slug($producto->linea().'-'.$producto->linea_negocio_id))}}">{{$producto->linea()}}</a></li>
+                        <li><a href="<?php echo e(url('linea-negocio/'.str_slug($producto->linea().'-'.$producto->linea_negocio_id))); ?>"><?php echo e($producto->linea()); ?></a></li>
                         <li><i class="fa fa-angle-right"></i></li>
-                        @if($producto->mx==0)
-                        <li class="active">{{$producto->codigo}} {{$producto->tipo()}} {{$producto->marca()}} {{$producto->modelo()}}</li>
-                        @else
-                        <li class="active">{{$producto->nombre}}</li>
-                        @endif
+                        <?php if($producto->mx==0): ?>
+                        <li class="active"><?php echo e($producto->codigo); ?> <?php echo e($producto->tipo()); ?> <?php echo e($producto->marca()); ?> <?php echo e($producto->modelo()); ?></li>
+                        <?php else: ?>
+                        <li class="active"><?php echo e($producto->nombre); ?></li>
+                        <?php endif; ?>
                     </ol>
                 </div>
             </div>
@@ -34,15 +34,15 @@
                     <!--<div class="sticker sticker-sale">sale</div>-->
                     <!-- Preview Slider -->
                     <div class="medium-slider">
-                        @foreach($producto->images() as $img)
-                            @if($img->video==1)
-                                @if($producto->link_video!="")
-                                <a id="vid1"><div style="position:relative;height:0;padding-bottom:56.25%; border: 1px solid white;"><iframe src="{{$producto->link_video}}" width="640" height="360" frameborder="0" allowfullscreen style="position:absolute;width:100%;height:100%;left:0;"></iframe></div></a>
-                                @endif
-                            @else
-                             <a href="{{$img->picture}}" title="{{$producto->serie}} {{$producto->modelo()}}" class="magnific"><img src="{{$img->picture}}" alt="{{$producto->serie}} {{$producto->modelo()}}"></a>
-                            @endif
-                        @endforeach
+                        <?php $__currentLoopData = $producto->images(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($img->video==1): ?>
+                                <?php if($producto->link_video!=""): ?>
+                                <a id="vid1"><div style="position:relative;height:0;padding-bottom:56.25%; border: 1px solid white;"><iframe src="<?php echo e($producto->link_video); ?>" width="640" height="360" frameborder="0" allowfullscreen style="position:absolute;width:100%;height:100%;left:0;"></iframe></div></a>
+                                <?php endif; ?>
+                            <?php else: ?>
+                             <a href="<?php echo e($img->picture); ?>" title="<?php echo e($producto->serie); ?> <?php echo e($producto->modelo()); ?>" class="magnific"><img src="<?php echo e($img->picture); ?>" alt="<?php echo e($producto->serie); ?> <?php echo e($producto->modelo()); ?>"></a>
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
 
@@ -57,15 +57,15 @@
                     <div class="thwrap">
                         <div class="thumbs-slider">
                             <?php $x=0; ?>
-                            @foreach($producto->images() as $img)
-                                @if($img->video==1)
-                                    @if($producto->link_video!="")
-                                    <a href="#vid1"><img src="{{url('asset/images/promin_play.jpg')}}" alt="" class="miniaturas"></a>
-                                    @endif
-                                @else
-                                 <a href="{{$img->picture}}" data-bigimg="{{$img->picture}}"><img src="{{$img->picture}}" alt="" class="miniaturas"></a>
-                                @endif
-                            @endforeach
+                            <?php $__currentLoopData = $producto->images(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php if($img->video==1): ?>
+                                    <?php if($producto->link_video!=""): ?>
+                                    <a href="#vid1"><img src="<?php echo e(url('asset/images/promin_play.jpg')); ?>" alt="" class="miniaturas"></a>
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                 <a href="<?php echo e($img->picture); ?>" data-bigimg="<?php echo e($img->picture); ?>"><img src="<?php echo e($img->picture); ?>" alt="" class="miniaturas"></a>
+                                <?php endif; ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
                 </div>
@@ -73,13 +73,13 @@
                 <div class="row">
                     <div class="col-md-12 text-center compartir">
                         <strong>Compartir:</strong>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//dev.promin.mx{{$_SERVER['REQUEST_URI']}}" target="_black">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//dev.promin.mx<?php echo e($_SERVER['REQUEST_URI']); ?>" target="_black">
                             <span class="fa-stack fa-lg">
                               <i class="fa fa-circle fa-stack-2x face"></i>
                               <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
                             </span>
                         </a>
-                        <a href="https://twitter.com/home?status=http%3A//dev.promin.mx{{$_SERVER['REQUEST_URI']}}" target="_black">
+                        <a href="https://twitter.com/home?status=http%3A//dev.promin.mx<?php echo e($_SERVER['REQUEST_URI']); ?>" target="_black">
                             <span class="fa-stack fa-lg">
                               <i class="fa fa-circle fa-stack-2x twitt"></i>
                               <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -93,35 +93,35 @@
             <!-- Descripción Producto -->
             <div class="col-sm-6">
                 <div class="row">
-                        <h1>{{$producto->nombre}}</h1>
+                        <h1><?php echo e($producto->nombre); ?></h1>
                     <div class="cost">
-                        <span class="new">$ {{number_format($producto->priceVenta, 2, '.', ',')}}</span>
+                        <span class="new">$ <?php echo e(number_format($producto->priceVenta, 2, '.', ',')); ?></span>
                     </div>
 
                     <div class="wishlist">
-                        <a href="" style="cursor: pointer;" class="corazon whish" producto='{{$producto->id}}'><i class="fa fa-heart corazon"></i> Agregar a Wishlist</a>
+                        <a href="" style="cursor: pointer;" class="corazon whish" producto='<?php echo e($producto->id); ?>'><i class="fa fa-heart corazon"></i> Agregar a Wishlist</a>
                     </div>
                 </div>
                 
                 <div class="row">
-                    <p>{{$producto->descripcion}}</p>
+                    <p><?php echo e($producto->descripcion); ?></p>
                 </div>
                 <div class="row product-count">
                     <div class="counting inline-block">
-                        <a href="#" class="a-less @if($qty<=1) disabled @endif update" data-id="{{$producto->id}}" data-mode="remove">-</a>
-                        <input type="text" value="{{$qty}}" id="input-cart-{{$producto->id}}" disabled>
-                        <a href="#" class="a-more update" data-id="{{$producto->id}}" data-mode="add">+</a>
+                        <a href="#" class="a-less <?php if($qty<=1): ?> disabled <?php endif; ?> update" data-id="<?php echo e($producto->id); ?>" data-mode="remove">-</a>
+                        <input type="text" value="<?php echo e($qty); ?>" id="input-cart-<?php echo e($producto->id); ?>" disabled>
+                        <a href="#" class="a-more update" data-id="<?php echo e($producto->id); ?>" data-mode="add">+</a>
                     </div>
-                    <div class="inline-block"><a class="btn btn_checkout add-cart" id="{{$producto->id}}" href="#"><i class="fa fa-check"></i> Comprar</a></div>
-                    @if($producto->linkMercadoLibre!="" or $producto->LinkMachineryTrader!="")
+                    <div class="inline-block"><a class="btn btn_checkout add-cart" id="<?php echo e($producto->id); ?>" href="#"><i class="fa fa-check"></i> Comprar</a></div>
+                    <?php if($producto->linkMercadoLibre!="" or $producto->LinkMachineryTrader!=""): ?>
                     <h4 class="tit_ml_mt">También lo puedes comprar en:</h4>
-                    @endif
-                    @if($producto->linkMercadoLibre!="")
-                    <div class="inline-block"><a href="{{$producto->linkMercadoLibre}}" target="_blank" class="btn_ml"><img src="{{url('asset/images/btn-mercado-libre.png')}}" alt="{{$producto->serie}} {{$producto->modelo()}} en MercadoLibre"></a></div>
-                    @endif
-                    @if($producto->LinkMachineryTrader!="")
-                    <div class="inline-block"><a href="{{$producto->LinkMachineryTrader}}" target="_blank" class="btn_ml"><img src="{{url('asset/images/btn-machinery-trader.png')}}" alt="{{$producto->serie}} {{$producto->modelo()}} en Machinery Trader"></a></div>
-                    @endif
+                    <?php endif; ?>
+                    <?php if($producto->linkMercadoLibre!=""): ?>
+                    <div class="inline-block"><a href="<?php echo e($producto->linkMercadoLibre); ?>" target="_blank" class="btn_ml"><img src="<?php echo e(url('asset/images/btn-mercado-libre.png')); ?>" alt="<?php echo e($producto->serie); ?> <?php echo e($producto->modelo()); ?> en MercadoLibre"></a></div>
+                    <?php endif; ?>
+                    <?php if($producto->LinkMachineryTrader!=""): ?>
+                    <div class="inline-block"><a href="<?php echo e($producto->LinkMachineryTrader); ?>" target="_blank" class="btn_ml"><img src="<?php echo e(url('asset/images/btn-machinery-trader.png')); ?>" alt="<?php echo e($producto->serie); ?> <?php echo e($producto->modelo()); ?> en Machinery Trader"></a></div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -163,57 +163,57 @@
                     <div class="tab-pane fade in active" id="description">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h2>{{$producto->nombre}}</h2>
-                                <a href="{{url('linea-negocio/'.str_slug($producto->linea()).'-'.$producto->linea_negocio_id)}}" class="btn_ver_catalogo"><i class="fa fa-search"></i> Ver Catálogo {{$producto->linea()}}</a><!-- aquí va la línea de negocio, en este ejemplo es KCP-->
+                                <h2><?php echo e($producto->nombre); ?></h2>
+                                <a href="<?php echo e(url('linea-negocio/'.str_slug($producto->linea()).'-'.$producto->linea_negocio_id)); ?>" class="btn_ver_catalogo"><i class="fa fa-search"></i> Ver Catálogo <?php echo e($producto->linea()); ?></a><!-- aquí va la línea de negocio, en este ejemplo es KCP-->
                                 <br><br>
                             </div>
                             <div class="col-sm-8">
                                 <div class="tab-responsive">
                                     <table class="table table-bordered table-condensed">
                                         <tbody>
-                                        @if($producto->mx==1)
+                                        <?php if($producto->mx==1): ?>
                                             <tr>
                                                 <td class="bg_blanco">SKU</td>
-                                                <td class="bg_blanco">MX-{{$producto->id}}-{{$producto->tipo()}}- {{$producto->serie}} </td>
+                                                <td class="bg_blanco">MX-<?php echo e($producto->id); ?>-<?php echo e($producto->tipo()); ?>- <?php echo e($producto->serie); ?> </td>
                                             </tr>
-                                        @endif
+                                        <?php endif; ?>
                                             <tr>
                                                 <td class="bg_blanco">Marca</td>
-                                                <td class="bg_blanco">{{$producto->marca()}}</td>
+                                                <td class="bg_blanco"><?php echo e($producto->marca()); ?></td>
                                             </tr>
                                             <tr>
                                                 <td class="bg_blanco">Modelo</td>
-                                                <td class="bg_blanco">{{$producto->modelo()}}</td>
+                                                <td class="bg_blanco"><?php echo e($producto->modelo()); ?></td>
                                             </tr>
                                             <tr>
                                                 <td class="bg_blanco">Serie</td>
-                                                <td class="bg_blanco">{{$producto->serie}}</td>
+                                                <td class="bg_blanco"><?php echo e($producto->serie); ?></td>
                                             </tr>
-                                            @if($producto->mx==0)
+                                            <?php if($producto->mx==0): ?>
                                             <tr>
                                                 <td class="bg_blanco">Código</td>
-                                                <td class="bg_blanco">{{$producto->serie}}</td>
+                                                <td class="bg_blanco"><?php echo e($producto->serie); ?></td>
                                             </tr>
-                                            @endif
-                                            @if($producto->horometro!="")
+                                            <?php endif; ?>
+                                            <?php if($producto->horometro!=""): ?>
                                             <tr>
                                                 <td class="bg_blanco">Horómetro</td>
-                                                <td class="bg_blanco">{{$producto->horometro}}</td>
+                                                <td class="bg_blanco"><?php echo e($producto->horometro); ?></td>
                                             </tr>
-                                            @endif
+                                            <?php endif; ?>
                                         </tbody>
                                     </table>
                                 </div>
-                                @if($producto->mx==0 and $producto->ficha!="")
-                                <a href="{{$producto->ficha}}" target="_blank" class="btn_ver_ficha inline-block"><i class="fa fa-search"></i> Ver ficha técnica</a>
-                                @endif
+                                <?php if($producto->mx==0 and $producto->ficha!=""): ?>
+                                <a href="<?php echo e($producto->ficha); ?>" target="_blank" class="btn_ver_ficha inline-block"><i class="fa fa-search"></i> Ver ficha técnica</a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="reviews">
                         <div class="row">
                             <div class="col-sm-8 col-sm-offset-2 bg_blanco2">
-                                <div class="fb-comments" data-href="{{url($_SERVER['REQUEST_URI'])}}" data-numposts="3" data-width="700" data-mobile="true"></div>
+                                <div class="fb-comments" data-href="<?php echo e(url($_SERVER['REQUEST_URI'])); ?>" data-numposts="3" data-width="700" data-mobile="true"></div>
                             </div>
                         </div>
                     </div>
@@ -227,8 +227,8 @@
             </div>
           </div>
         </div>
-@section('js-script')
+<?php $__env->startSection('js-script'); ?>
         <script type="text/javascript">
         
         </script>
-@endsection
+<?php $__env->stopSection(); ?>

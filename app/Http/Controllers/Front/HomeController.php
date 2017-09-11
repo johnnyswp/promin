@@ -24,7 +24,7 @@ use App\Models\Admin\DatoEnvio;
 
 use App\Models\Wishlist;
 
-use Artisan,DB,Hash,Auth;
+use Artisan,DB,Hash,Auth,Cart;
 use Validator;
 
 
@@ -201,8 +201,21 @@ class HomeController extends Controller
     {
         $producto_id = array_reverse(explode('-',$producto))[0];
         $producto = Producto::find($producto_id);
+     
+        session(['pro_id'=>$producto_id]);
+        $cart = Cart::content();
+        $itemCart = $cart->search(function ($cartItem, $rowId) {
+            return $cartItem->id === intval(session('pro_id'));
+        });
+        $rowId="";
+        $qty = 0;
+        if($itemCart!==false){
+           $data  = Cart::get($itemCart);
+           $rowId = $itemCart;
+           $qty = $data->qty;
+        }
         
-        return view('front.pages.producto')->with(['producto'=>$producto,'carousel'=>false]);
+        return view('front.pages.producto')->with(['producto'=>$producto,'rowId'=>$rowId,'qty'=>$qty,'carousel'=>false]);
     }
 
     public function getNoticias(Request $req)

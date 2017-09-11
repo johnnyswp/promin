@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::post('/add-cart/{id}','\App\Http\Controllers\Front\ShopingCartController@addCart');
 Route::post('/delete-cart/{id}','\App\Http\Controllers\Front\ShopingCartController@deleteCart');
 Route::post('/update-cart/{id}/{val}','\App\Http\Controllers\Front\ShopingCartController@updateCart');
+Route::post('/update-one-cart/{id}/{val}/{mode}','\App\Http\Controllers\Front\ShopingCartController@updateOneCart');
 Route::get('/pago-seguro','\App\Http\Controllers\Front\ShopingCartController@pedidoCart');
 Route::post('/pago-seguro','\App\Http\Controllers\Front\PagoSeguroController@pedidoSave');
 
@@ -63,29 +64,27 @@ Route::get('/ok', ['as'=>'test.file','uses'=> '\App\Http\Controllers\Front\HomeC
 
 Route::get('/test', function () { 
 
+    $adminRole = \App\Models\Role::whereName('administrator')->first();
+    $user1 = \App\Models\User::create(array(
+        'name'    => 'John',
+        'last_name'     => 'Doe',
+        'email'         => 'john@admin.com',
+        'password'      => Hash::make('admin123'),
+        'picture'         => '/assets/images/avatar.png',            
+        'token'         => str_random(64),
+        'activated'     => true,
+        'tipo_user'     => 'email'
 
-        $adminRole = \App\Models\Role::whereName('administrator')->first();
-        $user1 = \App\Models\User::create(array(
-            'name'    => 'John',
-            'last_name'     => 'Doe',
-            'email'         => 'john@admin.com',
-            'password'      => Hash::make('admin123'),
-            'picture'         => '/assets/images/avatar.png',            
-            'token'         => str_random(64),
-            'activated'     => true,
-            'tipo_user'     => 'email'
+    ));
+    $user1->assignRole($adminRole);
+    
+    /* $user1 = \App\Models\User::find(1);*/
+    $dd = new \App\Models\Admin\DatoFacturacion;
+    $dd->user_id = $user1->id;
+    $dd->save();
 
-        ));
-        $user1->assignRole($adminRole);
-        
-        
-       /* $user1 = \App\Models\User::find(1);*/
-        $dd = new \App\Models\Admin\DatoFacturacion;
-        $dd->user_id = $user1->id;
-        $dd->save();
-
-        $de = new \App\Models\Admin\DatoEnvio;
-        $de->user_id = $user1->id;
-        $de->save();
+    $de = new \App\Models\Admin\DatoEnvio;
+    $de->user_id = $user1->id;
+    $de->save();
 });
 
