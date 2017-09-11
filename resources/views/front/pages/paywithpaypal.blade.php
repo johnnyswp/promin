@@ -9,14 +9,14 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                     {!! $message !!}
                 </div>
-                <?php Session::forget('success');?>
+                <?php Session::forget('success'); Cart::destroy(); Session::forget('pedido_id');Session::forget('email'); ?>
                 @endif
                 @if ($message = Session::get('error'))
                 <div class="custom-alerts alert alert-danger fade in">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                     {!! $message !!}
                 </div>
-                <?php Session::forget('error');?>
+                <?php Session::forget('error'); Cart::destroy(); Session::forget('pedido_id');Session::forget('email');?>
                 @endif
                
             </div>

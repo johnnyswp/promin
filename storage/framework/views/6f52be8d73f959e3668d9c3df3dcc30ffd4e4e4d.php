@@ -10,11 +10,11 @@
                     <li class="col-md-4">
                         <div class="cimg">
                            <a href="<?php echo e(url('linea-negocio/'.str_slug($producto->linea()).'/'.str_slug($producto->serie).'-'.str_slug($producto->marca()).'-'.str_slug($producto->modelo()).'-'.$producto->id)); ?>" class="aimg" title="<?php echo e($producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()); ?>"><img src="<?php echo e($producto->image()); ?>" alt="$NombreProducto $Marca $Modelo" class="producto_destacado"></a>
-                            <a href="pago-seguro.php" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
+                            <a href="/pago-seguro" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Comprar</a>
                             <a href="#whish" class="btn btn2 whish " producto='<?php echo e($producto->id); ?>'><i class="fa fa-heart corazon"></i></a>
                         </div>
                         <h5>
-                            <a href="producto.php" class="black" title="<?php echo e($producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()); ?>"><?php echo e($producto->nombre); ?></a>
+                            <a href="<?php echo e(url('linea-negocio/'.str_slug($producto->linea()).'/'.str_slug($producto->serie).'-'.str_slug($producto->marca()).'-'.str_slug($producto->modelo()).'-'.$producto->id)); ?>" class="black" title="<?php echo e($producto->linea().' '.$producto->serie.' '.$producto->marca().' '.$producto->modelo()); ?>"><?php echo e($producto->nombre); ?></a>
                             <small><?php echo e($producto->modelo()); ?></small>
                         </h5>
                         <div class="cost">$ <?php echo e(number_format($producto->priceVenta, 2, '.', ',')); ?></div>

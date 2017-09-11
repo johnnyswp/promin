@@ -2517,3 +2517,13 @@ div.mostar_txt:hover {
 .help-block{
     color: red!important;
 }
+.img_redpack {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 20px;
+    display: inline-block;
+}
+.tipo_azul {
+    color: #0954a2!important;
+}

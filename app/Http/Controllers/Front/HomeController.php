@@ -8,7 +8,8 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
- 
+use App\Mail\PedidoSend;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Admin\Imagen;
 use App\Models\Admin\Producto;
@@ -21,6 +22,7 @@ use App\Models\User;
 use App\Models\Admin\DatoFacturacion;
 
 use App\Models\Admin\DatoEnvio;
+use App\Models\Front\Pedido;
 
 use App\Models\Wishlist;
 
@@ -87,8 +89,16 @@ class HomeController extends Controller
                     'productos.priceVenta as price',
                     'wishlists.created_at as created_at'
                 )
-                ->get();            
-        return view('front.pages.mi-cuenta')->with('carousel',false)->with('whishlists',$whishlists);
+                ->get();
+
+        $pedidos = Pedido::where('user_id',Auth::user()->id)->where('status','Pedido')->pluck('id');
+        $pedidos2 = Pedido::where('user_id',Auth::user()->id)->where('status','completado')->pluck('id');
+        
+        return view('front.pages.mi-cuenta')
+                    ->with('carousel',false)
+                    ->with('pedidos',$pedidos)
+                    ->with('pedidos2',$pedidos2)
+                    ->with('whishlists',$whishlists);
     }
 
 
@@ -122,11 +132,12 @@ class HomeController extends Controller
             $imagen->save();
         }
     }
+    
     public function postOk(Request $req)
     {
-        $user = User::find(Auth::user()->id)->whishlists;
-        dd($user);
+        return Pedido::detalle(1);
     }
+
     public function getLineasNegocios($name, Request $request)
     {
         $linea_id = array_reverse(explode('-',$name))[0];

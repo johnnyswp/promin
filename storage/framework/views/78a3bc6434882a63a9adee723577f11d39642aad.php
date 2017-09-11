@@ -1,20 +1,16 @@
-@extends('admin.layouts.master')
-
-
-
-@section('title', 'Dashboard')
+<?php $__env->startSection('title', 'Dashboard'); ?>
 
 
 
 
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="">
   
   <div class="row">
     <div class="col-md-12">
-      <h1><i class="fa fa-tachometer"></i> Dashboard2</h1>
+      <h1><i class="fa fa-list-alt"></i> Pedidos</h1>
       <a class="btn btn-round btn-primary btn-md" role="button" data-toggle="collapse" href="#herramientas" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-filter"></i> <i class="fa fa-search"></i></a>
     </div>
   </div><!-- FIN ROW -->
@@ -90,8 +86,11 @@
 
 
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12 bg_blanco">                    
-                    <div class="row">  
+    <div class="col-md-12 col-sm-12 col-xs-12 bg_blanco">
+                
+                    
+                    <div class="row">
+                      
                       <div class="col-md-4 col-sm-6 col-xs-12">
                         <h2>LISTA DE PEDIDOS</h2>
                       </div>
@@ -145,7 +144,6 @@
                           <td class="text-right">$ 8,500.00</td>
                           <td>
                             <a href="pedido-5-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
-                            <a class="btn btn-warning btn-xs" alt="Costo de envío" data-toggle="modal" data-target="#modal_envio"><i class="fa fa-truck tipo_gris"></i></a>
                             <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
                             <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
                           </td>
@@ -235,29 +233,6 @@
                             <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                           </td>
                         </tr>
-                        @foreach($pedidos as $pedido)
-                        <?php $pe=App\Models\Front\Pedido::detalle($pedido->id); ?>
-                            <tr>
-                                  <td>{{$pe['fecha']}}</td>
-                                  <td>{{$pe['id']}}</td>
-                                  <td>
-                                    @foreach($pe['detalles'] as $de)
-                                            {{$de['nombre']}}
-                                            <br>
-                                    @endforeach
-                                  </td>
-                                  <td>{{$pe['nombre']}}</td>
-                                  <td class="text-center">
-                                    <span class="sts_activo"><i class="fa fa-check"></i> Venta</span>
-                                  </td>
-                                  <td class="text-center">ze20h099-f4e1-4z5f-8cce-060bg2340fe1</td>
-                                  <td class="text-right">$ {{$pedido->total}}</td>
-                                  <td>
-                                    <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
-                                    <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
-                                  </td>
-                            </tr>
-                        @endforeach
                       </tbody>
                     </table>
 
@@ -283,7 +258,7 @@
 </div> 
 </div>
 
-      <!-- Modal Venta -->
+    <!-- Modal Venta -->
     <div class="modal fade" id="modal_vta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -360,33 +335,7 @@
         </div>
       </div>
     </div>
+<?php $__env->stopSection(); ?>
 
-    <!-- Modal Envío -->
-    <div class="modal fade" id="modal_envio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">Para confirmar el costo de envío, llene el siguiente formulario:</h4>
-          </div>
-          <div class="modal-body">
 
-            <div class="row">
-              
-              <div class="col-md-12">
-                  <label>Costo de envío:</label>
-                  <input type="text" required="">
-              </div>
-
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Cancelar</button>
-            <button type="button" class="btn btn-success"><i class="fa fa-send"></i> Enviar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-@endsection
-
+<?php echo $__env->make('admin.layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
