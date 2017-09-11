@@ -151,7 +151,11 @@ class DashboardController extends Controller
 
     }
 
-
+    public function detalle($id)
+    {
+        $pedido = Pedido::detalle($id);
+        dd($pedido);
+    }
 
  
 

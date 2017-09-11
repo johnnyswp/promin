@@ -9,6 +9,10 @@ use Illuminate\Support\Collection;
 
 use DB;
 use App\Models\Admin\Producto;
+
+use App\Models\Front\PedidoDatoEnvio;
+use App\Models\Front\PedidoDatoFacturacion;
+
 use Carbon\Carbon;
 class Pedido extends Model {
 
@@ -45,8 +49,9 @@ class Pedido extends Model {
             $p=collect([
                 'id'    =>$pedido->id,
                 'total' =>$pedido->total,
-                'estado' =>$pedido->status,
-                'factura' =>$pedido->factura,
+                'estado'=>$pedido->status,
+                'factura'=>$pedido->factura,
+                'telefono'=>$pedido->telefono,
                 'nombre'=>$pedido->nombre." ".$pedido->apellido ,
                 'fecha' =>Carbon::parse($pedido->created_at)->format('d')."-".trans('main.'.Carbon::parse($pedido->created_at)->format('m'))."-".Carbon::parse($pedido->created_at)->format('Y')
             ]);
@@ -65,10 +70,16 @@ class Pedido extends Model {
                 );                 
             }
             
+            
+            $p->pull('facturacion');
+            $pdf=PedidoDatoFacturacion::find();
+
+
+
             //$collapsed = $p->combine($arrays);
             $p->put('detalles' , $detalles);
             
-
+            
             //dd($p->get('detalles'));
 
             /*foreach ($p->get('detalles') as $key) {

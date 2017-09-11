@@ -127,7 +127,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                    <!--
+                    
                         <tr>
                           <td>22-mar-2017</td>
                           <td>5</td>
@@ -236,7 +236,7 @@
                             <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                           </td>
                         </tr>
-                    -->
+                    <!-- -->
                         @foreach($pedidos as $pedido)
                         <?php $pe=App\Models\Front\Pedido::detalle($pedido->id); ?>
                             <tr>
@@ -250,7 +250,6 @@
                                   </td>
                                   <td>{{$pe['nombre']}}</td>                                 
                                   <td class="text-center">
-
                                     @if($pe['estado']=='Pedido')
                                         <span class="sts_pedido"><i class="fa fa-circle"></i> Pedido</span>
                                     @elseif($pe['estado']=='En proceso')
@@ -261,10 +260,29 @@
                                         <span class="sts_cancel"><i class="fa fa-remove"></i> Cancelado</span>                                                                               
                                     @endif
                                   </td>
+                                  <td class="text-center"> 
+                                        @if($pe['factura']=='')
+                                            <i class="fa fa-check"></i>
+                                        @else 
+                                            {{ $pe['factura']  }} 
+                                        @endif
+                                    </td>
                                   <td class="text-right">$ {{$pedido->total}}</td>
                                   <td>
-                                    <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
-                                    <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    @if($pe['estado']=='Pedido')
+                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    @elseif($pe['estado']=='En proceso')
+                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    @elseif($pe['estado']=='completado')
+                                        <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    @else 
+                                        <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>                                                                               
+                                    @endif                                   
                                   </td>
                             </tr>
                         @endforeach
