@@ -28,7 +28,7 @@ $('.update').on('click', function(event){
         type: 'POST',
         dataType: 'json',
     })
-    .done(function(json) { if(json.error=='1'){ promin.m('danger','No tienes productos en el carrito'); } $('#input-cart-'+id).val(json.qty); $('.hcart').html(json.html); $('#content-cart').css('display','block'); addEvent(); })
+    .done(function(json) { if(json.error=='1'){ promin.m('danger','No hay mas existencias de este producto'); } if(json.error=='4'){ promin.m('danger','No tienes productos en el carrito'); } $('#input-cart-'+id).val(json.qty); $('.hcart').html(json.html); $('#content-cart').css('display','block'); addEvent(); })
     .fail(function() { console.log("error"); })
     .always(function() { console.log("complete"); });
 });
@@ -48,7 +48,7 @@ function addEvent(){
         .fail(function() { console.log("error"); })
         .always(function() { console.log("complete"); });
     });
-    
+
     $('.update-cart').on('change', function(event){
         event.preventDefault();
         var id = $(this).attr('data-id');
