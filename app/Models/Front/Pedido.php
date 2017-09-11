@@ -45,6 +45,7 @@ class Pedido extends Model {
             $p=collect([
                 'id'    =>$pedido->id,
                 'total' =>$pedido->total,
+                'estado' =>$pedido->status,
                 'nombre'=>$pedido->nombre." ".$pedido->apellido ,
                 'fecha' =>Carbon::parse($pedido->created_at)->format('d')."-".trans('main.'.Carbon::parse($pedido->created_at)->format('m'))."-".Carbon::parse($pedido->created_at)->format('Y')
             ]);

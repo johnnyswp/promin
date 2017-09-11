@@ -94,9 +94,10 @@
             </div>
         </div>
         @endif
+
         <div class="row text-center">
             <div class="col-md-12">
-                  <a id="envio_" role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
+                    <a id="envio_" role="button" data-toggle="collapse" href="#datos_facturacion" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-file-pdf-o"></i> Requiero factura</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_facturacion">
                         @if(!Auth::check())
                             <div class="well">
@@ -416,10 +417,18 @@
                                          </div>
                         @endif
                     </div>
-                </div>
-                
-                <div class="col-md-12">
-                  <a id="factura_" role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
+            </div>
+            <div class="row">
+                <hr>
+            </div>
+            <div class="col-md-12">
+                    <br>
+                    <h1 class="tipo_naranja"><i class="fa fa-truck"></i> Envío</h1>
+                    <br>
+                    <label for=""><input type="radio" value="Redpack" checked=""> <img src="/assets/images/redpack.png" alt="" width="150" height="61" class="img_redpack"></label>
+                    <br>
+                    <br>
+                    <a id="factura_" role="button" data-toggle="collapse" href="#datos_envio" aria-expanded="false" aria-controls="collapseExample" class="btn btn_infoextra btn-xs"><i class="fa fa-truck"></i> Cotizar envío</a> <!-- al hacer click en este check, se debe de autocompletar el domicilio con la información antes capturada, con opción a actualizarla y debe de verse en estado "checked"-->
                     <div class="collapse" id="datos_envio">
                         @if(!Auth::check())
                             <div class="well">
@@ -695,7 +704,7 @@
                                              </div>
                         @endif                        
                     </div>
-                </div>
+            </div>
         </div>
  
         <div class="row">
@@ -750,6 +759,14 @@
                     @endforeach
                     <tr>
                         <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ {{Cart::subtotal()}}</strong></div></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right"><div class="tipo_azul"><strong><i class="fa fa-truck"></i> Costo de Envío: $500.00</strong></div></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right"><div class="tipo_naranja"><strong>Total: ${{Cart::total()}}</strong></div></td>
                         <td></td>
                     </tr>
                 </tbody>
