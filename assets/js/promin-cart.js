@@ -33,6 +33,33 @@ $('.update').on('click', function(event){
     .always(function() { console.log("complete"); });
 });
 
+$('.update-pedido').on('click', function(event){
+    event.preventDefault();
+
+    var id  = $(this).attr('data-id');
+    var val = parseInt($('#input-cart-'+id).val());
+    var mode = $(this).attr('data-mode');
+    if(mode=='remove'){ val=val-1; }else{ val=val+1; }
+    $.ajax({
+        url: '/update-one-cart/'+id+'/'+val+'/'+mode,
+        type: 'POST',
+        dataType: 'json',
+    })
+    .done(function(json) { 
+        if(json.error=='1'){ promin.m('danger','No hay mas existencias de este producto'); } 
+        if(json.error=='4'){ promin.m('danger','No tienes productos en el carrito'); } 
+        $('#input-cart-'+id).val(json.qty); 
+        $('.hcart').html(json.html); 
+        $('#content-cart').css('display','block'); addEvent(); 
+        $('#subtotal-'+id).html('$ '+json.ptotal);
+        $('#subtotal').html('Sub-Total: $ '+json.subtotal);
+        $('#total').html('Total: $ '+json.total);
+        if(json.qty<=0){ $('#pedido-'+id).remove(); }
+    })
+    .fail(function() { console.log("error"); })
+    .always(function() { console.log("complete"); });
+});
+
 addEvent();
 
 function addEvent(){

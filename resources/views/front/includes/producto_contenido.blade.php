@@ -108,9 +108,9 @@
                 </div>
                 <div class="row product-count">
                     <div class="counting inline-block">
-                        <a href="#" class="a-less @if($qty<=1) disabled @endif update" data-id="{{$producto->id}}" data-mode="remove">-</a>
+                        <a href="#" class="a-less @if($qty<=1) disabled @endif update-pedido" data-id="{{$producto->id}}" data-mode="remove">-</a>
                         <input type="text" value="{{$qty}}" id="input-cart-{{$producto->id}}" disabled>
-                        <a href="#" class="a-more update" data-id="{{$producto->id}}" data-mode="add">+</a>
+                        <a href="#" class="a-more update-pedido" data-id="{{$producto->id}}" data-mode="add">+</a>
                     </div>
                     <div class="inline-block"><a class="btn btn_checkout add-cart" id="{{$producto->id}}" href="#"><i class="fa fa-check"></i> Comprar</a></div>
                     @if($producto->linkMercadoLibre!="" or $producto->LinkMachineryTrader!="")
