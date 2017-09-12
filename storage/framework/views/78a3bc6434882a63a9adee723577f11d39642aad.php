@@ -10,7 +10,7 @@
   
   <div class="row">
     <div class="col-md-12">
-      <h1><i class="fa fa-list-alt"></i> Pedidos</h1>
+      <h1><i class="fa fa-tachometer"></i> Dashboard</h1>
       <a class="btn btn-round btn-primary btn-md" role="button" data-toggle="collapse" href="#herramientas" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-filter"></i> <i class="fa fa-search"></i></a>
     </div>
   </div><!-- FIN ROW -->
@@ -86,11 +86,8 @@
 
 
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12 bg_blanco">
-                
-                    
-                    <div class="row">
-                      
+    <div class="col-md-12 col-sm-12 col-xs-12 bg_blanco">                    
+                    <div class="row">  
                       <div class="col-md-4 col-sm-6 col-xs-12">
                         <h2>LISTA DE PEDIDOS</h2>
                       </div>
@@ -126,6 +123,7 @@
                         </tr>
                       </thead>
                       <tbody>
+                    
                         <tr>
                           <td>22-mar-2017</td>
                           <td>5</td>
@@ -144,6 +142,7 @@
                           <td class="text-right">$ 8,500.00</td>
                           <td>
                             <a href="pedido-5-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                            <a class="btn btn-warning btn-xs" alt="Costo de envío" data-toggle="modal" data-target="#modal_envio"><i class="fa fa-truck tipo_gris"></i></a>
                             <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
                             <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
                           </td>
@@ -233,12 +232,64 @@
                             <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                           </td>
                         </tr>
+                    <!-- -->
+                        <?php $__currentLoopData = $pedidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pedido): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $pe=App\Models\Front\Pedido::detalle($pedido->id); ?>
+                            <tr>
+                                  <td><?php echo e($pe['fecha']); ?></td>
+                                  <td><?php echo e($pe['id']); ?></td>
+                                  <td>
+                                    <?php $__currentLoopData = $pe['detalles']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $de): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php echo e($de['nombre']); ?>
+
+                                            <br>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                  </td>
+                                  <td><?php echo e($pe['nombre']); ?></td>                                 
+                                  <td class="text-center">
+                                    <?php if($pe['estado']=='Pedido'): ?>
+                                        <span class="sts_pedido"><i class="fa fa-circle"></i> Pedido</span>
+                                    <?php elseif($pe['estado']=='En proceso'): ?>
+                                        <span class="sts_pedido"><i class="fa fa-circle"></i> Pedido</span>
+                                    <?php elseif($pe['estado']=='completado'): ?>
+                                        <span class="sts_activo"><i class="fa fa-check"></i> Venta</span>
+                                    <?php else: ?> 
+                                        <span class="sts_cancel"><i class="fa fa-remove"></i> Cancelado</span>                                                                               
+                                    <?php endif; ?>
+                                  </td>
+                                  <td class="text-center"> 
+                                        <?php if($pe['factura']==''): ?>
+                                            <i class="fa fa-check"></i>
+                                        <?php else: ?> 
+                                            <?php echo e($pe['factura']); ?> 
+                                        <?php endif; ?>
+                                    </td>
+                                  <td class="text-right">$ <?php echo e($pedido->total); ?></td>
+                                  <td>
+                                    <?php if($pe['estado']=='Pedido'): ?>
+                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php elseif($pe['estado']=='En proceso'): ?>
+                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php elseif($pe['estado']=='completado'): ?>
+                                        <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php else: ?> 
+                                        <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>                                                                               
+                                    <?php endif; ?>                                   
+                                  </td>
+                            </tr>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                       </tbody>
                     </table>
 
                   </div>
-                  
-                  <div class="row">
+                  <?php echo e($pedidos->links()); ?>
+
+                  <!--<div class="row">
                     <div class="col-md-12">
                       <nav aria-label="...">
                         <ul class="pagination">
@@ -252,13 +303,13 @@
                         </ul> 
                       </nav>
                     </div>
-                  </div> <!--FIN PAGINACIÓN-->
+                  </div> FIN PAGINACIÓN-->
                 
 
 </div> 
 </div>
 
-    <!-- Modal Venta -->
+      <!-- Modal Venta -->
     <div class="modal fade" id="modal_vta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -335,6 +386,34 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal Envío -->
+    <div class="modal fade" id="modal_envio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Para confirmar el costo de envío, llene el siguiente formulario:</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="row">
+              
+              <div class="col-md-12">
+                  <label>Costo de envío:</label>
+                  <input type="text" required="">
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-remove"></i> Cancelar</button>
+            <button type="button" class="btn btn-success"><i class="fa fa-send"></i> Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 <?php $__env->stopSection(); ?>
 
 

@@ -10,7 +10,7 @@
   
   <div class="row">
     <div class="col-md-12">
-      <h1><i class="fa fa-tachometer"></i> Dashboard2</h1>
+      <h1><i class="fa fa-tachometer"></i> Dashboard</h1>
       <a class="btn btn-round btn-primary btn-md" role="button" data-toggle="collapse" href="#herramientas" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-filter"></i> <i class="fa fa-search"></i></a>
     </div>
   </div><!-- FIN ROW -->
@@ -123,6 +123,7 @@
                         </tr>
                       </thead>
                       <tbody>
+                    
                         <tr>
                           <td>22-mar-2017</td>
                           <td>5</td>
@@ -231,6 +232,7 @@
                             <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                           </td>
                         </tr>
+                    <!-- -->
                         <?php $__currentLoopData = $pedidos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $pedido): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php $pe=App\Models\Front\Pedido::detalle($pedido->id); ?>
                             <tr>
@@ -243,15 +245,41 @@
                                             <br>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                   </td>
-                                  <td><?php echo e($pe->nombre); ?></td>
+                                  <td><?php echo e($pe['nombre']); ?></td>                                 
                                   <td class="text-center">
-                                    <span class="sts_activo"><i class="fa fa-check"></i> Venta</span>
+                                    <?php if($pe['estado']=='Pedido'): ?>
+                                        <span class="sts_pedido"><i class="fa fa-circle"></i> Pedido</span>
+                                    <?php elseif($pe['estado']=='En proceso'): ?>
+                                        <span class="sts_pedido"><i class="fa fa-circle"></i> Pedido</span>
+                                    <?php elseif($pe['estado']=='completado'): ?>
+                                        <span class="sts_activo"><i class="fa fa-check"></i> Venta</span>
+                                    <?php else: ?> 
+                                        <span class="sts_cancel"><i class="fa fa-remove"></i> Cancelado</span>                                                                               
+                                    <?php endif; ?>
                                   </td>
-                                  <td class="text-center">ze20h099-f4e1-4z5f-8cce-060bg2340fe1</td>
+                                  <td class="text-center"> 
+                                        <?php if($pe['factura']==''): ?>
+                                            <i class="fa fa-check"></i>
+                                        <?php else: ?> 
+                                            <?php echo e($pe['factura']); ?> 
+                                        <?php endif; ?>
+                                    </td>
                                   <td class="text-right">$ <?php echo e($pedido->total); ?></td>
                                   <td>
-                                    <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
-                                    <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php if($pe['estado']=='Pedido'): ?>
+                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php elseif($pe['estado']=='En proceso'): ?>
+                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php elseif($pe['estado']=='completado'): ?>
+                                        <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
+                                    <?php else: ?> 
+                                        <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>                                                                               
+                                    <?php endif; ?>                                   
                                   </td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -259,8 +287,9 @@
                     </table>
 
                   </div>
-                  
-                  <div class="row">
+                  <?php echo e($pedidos->links()); ?>
+
+                  <!--<div class="row">
                     <div class="col-md-12">
                       <nav aria-label="...">
                         <ul class="pagination">
@@ -274,7 +303,7 @@
                         </ul> 
                       </nav>
                     </div>
-                  </div> <!--FIN PAGINACIÓN-->
+                  </div> FIN PAGINACIÓN-->
                 
 
 </div> 

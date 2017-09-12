@@ -21,6 +21,7 @@ Route::get('admin/', function () {
 Route::group(['middleware' => ['auth','admin'],'prefix' => 'admin'], function () {    
 
     Route::get('/pedidos', '\App\Http\Controllers\Admin\DashboardController@index')->name('home');
+    Route::get('/pedidos/{id}', '\App\Http\Controllers\Admin\DashboardController@detalle')->name('pedido_detalle');
     Route::post('/gastos/create', '\App\Http\Controllers\Admin\HomeController@addGastos')->name('gastos.create');
     Route::post('/gastos/delete', '\App\Http\Controllers\Admin\HomeController@delGastos')->name('gastos.delete');
     Route::post('/bitacoras/create', '\App\Http\Controllers\Admin\HomeController@addbitacoras')->name('bitacoras.create');

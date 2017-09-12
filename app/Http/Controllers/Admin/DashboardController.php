@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
-
 use Validator;
 
 use DB;
@@ -36,13 +34,8 @@ use Form;
  
 use Auth;
 
-
-
 class DashboardController extends Controller
-
 {
-
-
 
     /**
 
@@ -143,8 +136,6 @@ class DashboardController extends Controller
 
             }
             
-            
-            
             return view('admin.pages.dashboard.index')->with(['pedidos'=>$pedidos]);
 
         /*
@@ -153,7 +144,11 @@ class DashboardController extends Controller
 
     }
 
-
+    public function detalle($id)
+    {
+        $pedido = Pedido::detalle($id);
+        dd($pedido);
+    }
 
  
 
