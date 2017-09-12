@@ -7,7 +7,13 @@
                 <a href="{{$cart->options->link}}" class="fig pull-left"><img src="{{$cart->options->img}}" style="width: 85%;"></a>
                 <div class="block">
                     <a href="{{$cart->options->link}}">{{$cart->name}}</a>
-                    <div class="cost"><input type="number" class="input_cant update-cart" value="{{$cart->qty}}" data-id="{{$cart->rowId}}"> $ {{number_format($cart->subtotal, 2, '.', ',')}}<div class="container_eliminar pull-right"><a href="#" class="delete-cart" data-id="{{$cart->rowId}}"><i class="fa fa-remove tipo_roja"></i></a></div></div>
+                    <div class="cost">
+                        <input type="number" class="input_cant update-cart" value="{{$cart->qty}}" data-id="{{$cart->rowId}}"> 
+                        $ {{number_format($cart->subtotal, 2, '.', ',')}}
+                        <div class="container_eliminar pull-right">
+                            <a href="#" class="delete-cart" data-id="{{$cart->id}}" data-rowId="{{$cart->rowId}}"><i class="fa fa-remove tipo_roja"></i></a>
+                        </div>
+                    </div>
                 </div>
             </li>
             @endforeach

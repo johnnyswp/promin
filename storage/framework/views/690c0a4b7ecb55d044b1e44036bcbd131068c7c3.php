@@ -108,9 +108,9 @@
                 </div>
                 <div class="row product-count">
                     <div class="counting inline-block">
-                        <a href="#" class="a-less <?php if($qty<=1): ?> disabled <?php endif; ?> update" data-id="<?php echo e($producto->id); ?>" data-mode="remove">-</a>
+                        <a href="#" class="a-less <?php if($qty<=1): ?> disabled <?php endif; ?> update-pedido" data-id="<?php echo e($producto->id); ?>" data-mode="remove">-</a>
                         <input type="text" value="<?php echo e($qty); ?>" id="input-cart-<?php echo e($producto->id); ?>" disabled>
-                        <a href="#" class="a-more update" data-id="<?php echo e($producto->id); ?>" data-mode="add">+</a>
+                        <a href="#" class="a-more update-pedido" data-id="<?php echo e($producto->id); ?>" data-mode="add">+</a>
                     </div>
                     <div class="inline-block"><a class="btn btn_checkout add-cart" id="<?php echo e($producto->id); ?>" href="#"><i class="fa fa-check"></i> Comprar</a></div>
                     <?php if($producto->linkMercadoLibre!="" or $producto->LinkMachineryTrader!=""): ?>

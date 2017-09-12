@@ -62,16 +62,30 @@ $('.update-pedido').on('click', function(event){
 
 addEvent();
 
+$('.tr-remove').on('click', function(event){
+     event.preventDefault();
+     var rowId = $(this).attr('data-rowId');
+     $.ajax({
+         url: '/delete-cart/'+rowId,
+         type: 'POST',
+         dataType: 'html',
+     })
+     .done(function(html) { window.location.reload(true); })
+     .fail(function() { console.log("error"); })
+     .always(function() { console.log("complete"); });
+ });
+
 function addEvent(){
     $('.delete-cart').on('click', function(event){
         event.preventDefault();
+        var rowId = $(this).attr('data-rowId');
         var id = $(this).attr('data-id');
         $.ajax({
-            url: '/delete-cart/'+id,
+            url: '/delete-cart/'+rowId,
             type: 'POST',
             dataType: 'html',
         })
-        .done(function(html) { $('.hcart').html(html); $('#content-cart').css('display','block'); addEvent(); })
+        .done(function(html) { $('.hcart').html(html); $('#content-cart').css('display','block'); addEvent(); $('#pedido-'+id).remove(); })
         .fail(function() { console.log("error"); })
         .always(function() { console.log("complete"); });
     });

@@ -7,7 +7,14 @@
                 <a href="<?php echo e($cart->options->link); ?>" class="fig pull-left"><img src="<?php echo e($cart->options->img); ?>" style="width: 85%;"></a>
                 <div class="block">
                     <a href="<?php echo e($cart->options->link); ?>"><?php echo e($cart->name); ?></a>
-                    <div class="cost"><input type="number" class="input_cant update-cart" value="<?php echo e($cart->qty); ?>" data-id="<?php echo e($cart->rowId); ?>"> $ <?php echo e(number_format($cart->subtotal, 2, '.', ',')); ?><div class="container_eliminar pull-right"><a href="#" class="delete-cart" data-id="<?php echo e($cart->rowId); ?>"><i class="fa fa-remove tipo_roja"></i></a></div></div>
+                    <div class="cost">
+                        <input type="number" class="input_cant update-cart" value="<?php echo e($cart->qty); ?>" data-id="<?php echo e($cart->rowId); ?>"> 
+                        $ <?php echo e(number_format($cart->subtotal, 2, '.', ',')); ?>
+
+                        <div class="container_eliminar pull-right">
+                            <a href="#" class="delete-cart" data-id="<?php echo e($cart->id); ?>" data-rowId="<?php echo e($cart->rowId); ?>"><i class="fa fa-remove tipo_roja"></i></a>
+                        </div>
+                    </div>
                 </div>
             </li>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

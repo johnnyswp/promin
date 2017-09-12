@@ -753,7 +753,7 @@
                             <div class="tipo_negra" id="subtotal-{{$cart->id}}">$ {{number_format($cart->subtotal, 2, '.', ',')}}</div>
                         </td>
                         <td class="text-center">
-                            <a href="" class="pclose small tr-remove"><i class="custom-icon custom-icon-close-s"></i></a>
+                            <a href="" class="pclose small tr-remove" data-id="{{$cart->id}}" data-rowId="{{$cart->rowId}}"><i class="custom-icon custom-icon-close-s"></i></a>
                         </td>
                     </tr>
                     @endforeach

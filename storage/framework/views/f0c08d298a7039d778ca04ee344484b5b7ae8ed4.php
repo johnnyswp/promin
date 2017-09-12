@@ -773,7 +773,7 @@
                             <div class="tipo_negra" id="subtotal-<?php echo e($cart->id); ?>">$ <?php echo e(number_format($cart->subtotal, 2, '.', ',')); ?></div>
                         </td>
                         <td class="text-center">
-                            <a href="" class="pclose small tr-remove"><i class="custom-icon custom-icon-close-s"></i></a>
+                            <a href="" class="pclose small tr-remove" data-id="<?php echo e($cart->id); ?>" data-rowId="<?php echo e($cart->rowId); ?>"><i class="custom-icon custom-icon-close-s"></i></a>
                         </td>
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
