@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-
-
 use Validator;
 
 use DB;
@@ -36,13 +34,8 @@ use Form;
  
 use Auth;
 
-
-
 class DashboardController extends Controller
-
 {
-
-
 
     /**
 

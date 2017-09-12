@@ -47,13 +47,13 @@ class Pedido extends Model {
             $arrays = [];
 
             $p=collect([
-                'id'    =>$pedido->id,
-                'total' =>$pedido->total,
-                'estado'=>$pedido->status,
-                'factura'=>$pedido->factura,
-                'telefono'=>$pedido->telefono,
-                'nombre'=>$pedido->nombre." ".$pedido->apellido ,
-                'fecha' =>Carbon::parse($pedido->created_at)->format('d')."-".trans('main.'.Carbon::parse($pedido->created_at)->format('m'))."-".Carbon::parse($pedido->created_at)->format('Y')
+                'id'        =>$pedido->id,
+                'total'     =>$pedido->total,
+                'estado'    =>$pedido->status,
+                'factura'   =>$pedido->factura,
+                'telefono'  =>$pedido->telefono,
+                'nombre'    =>$pedido->nombre." ".$pedido->apellido ,
+                'fecha'     =>Carbon::parse($pedido->created_at)->format('d')."-".trans('main.'.Carbon::parse($pedido->created_at)->format('m'))."-".Carbon::parse($pedido->created_at)->format('Y')
             ]);
             $detalle = DB::table('pedidos_detalle')->where('pedido_id',$id)->get(); 
             
@@ -70,14 +70,37 @@ class Pedido extends Model {
                 );                 
             }
             
-            
-            $p->pull('facturacion');
-            $pdf=PedidoDatoFacturacion::find();
-
-
-
             //$collapsed = $p->combine($arrays);
             $p->put('detalles' , $detalles);
+
+
+            
+            $p->pull('facturacion');
+            $PedidoDatoFacturacion=PedidoDatoFacturacion::find($pedido->id);
+                $pdf[] = array(
+                        'razon_social'  =>$PedidoDatoFacturacion->razon_social,
+                        'rfc'           =>$PedidoDatoFacturacion->rfc,
+                        'cp'            =>$PedidoDatoFacturacion->cp,
+                        'calle'         =>$PedidoDatoFacturacion->calle,
+                        'n_ext'         =>$PedidoDatoFacturacion->n_ext
+                );                 
+
+            $p->put('facturacion', $pdf);
+
+
+            $p->pull('envio');
+            $PedidoDatoEnvio=PedidoDatoEnvio::find($pedido->id);
+                $pde[] = array(
+                        'rfc'           =>$PedidoDatoEnvio->rfc,
+                        'cp'            =>$PedidoDatoEnvio->cp,
+                        'calle'         =>$PedidoDatoEnvio->calle,
+                        'n_ext'         =>$PedidoDatoEnvio->n_ext
+                );                 
+
+            $p->put('envio', $pde);
+
+
+            
             
             
             //dd($p->get('detalles'));
