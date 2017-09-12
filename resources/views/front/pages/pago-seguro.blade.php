@@ -732,7 +732,7 @@
                 </thead>
                 <tbody>
                     @foreach(Cart::content() as $cart)
-                    <tr>
+                    <tr id="pedido-{{$cart->id}}">
                         <td class="text-center">
                             <img src="{{$cart->options->img}}" alt="{{$cart->name}}" class="img-responsive" width="120">
                         </td>
@@ -744,13 +744,13 @@
                         </td>
                         <td>
                             <div class="counting inline-block">
-                                <a href="" class="a-less disabled">-</a>
-                                <input type="text" value="{{$cart->qty}}">
-                                <a href="" class="a-more">+</a>
+                                <a href="#" class="a-less @if($cart->qty<=1) disabled @endif update-pedido" data-id="{{$cart->id}}" data-mode="remove">-</a>
+                                <input type="text" value="{{$cart->qty}}" id="input-cart-{{$cart->id}}" disabled>
+                                <a href="#" class="a-more update-pedido" data-id="{{$cart->id}}" data-mode="add">+</a>
                             </div>
                         </td>
                         <td class="text-right">
-                            <div class="tipo_negra">$ {{number_format($cart->subtotal, 2, '.', ',')}}</div>
+                            <div class="tipo_negra" id="subtotal-{{$cart->id}}">$ {{number_format($cart->subtotal, 2, '.', ',')}}</div>
                         </td>
                         <td class="text-center">
                             <a href="" class="pclose small tr-remove"><i class="custom-icon custom-icon-close-s"></i></a>
@@ -758,7 +758,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ {{Cart::subtotal()}}</strong></div></td>
+                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong id="subtotal">Sub-Total: $ {{Cart::subtotal()}}</strong></div></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -766,7 +766,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-right"><div class="tipo_naranja"><strong>Total: ${{Cart::total()}}</strong></div></td>
+                        <td colspan="5" class="text-right"><div class="tipo_naranja"><strong id="total">Total: ${{Cart::total()}}</strong></div></td>
                         <td></td>
                     </tr>
                 </tbody>

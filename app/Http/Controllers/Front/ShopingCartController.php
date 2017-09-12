@@ -104,6 +104,7 @@ class ShopingCartController extends Controller
     {
         $error = "0";
         $qty = $val;
+
         if($val<0){
             $error = "4";
             $qty = 0;
@@ -140,6 +141,7 @@ class ShopingCartController extends Controller
                 }
             }
         } 
+        $ptotal = 0;
         $html = '<a href="#" class="btn_carrito"><i class="fa fa-shopping-cart carrito"></i> '.Cart::count().' items - $ '.Cart::subtotal().'</a>
                  <div class="dropdown" id="content-cart">
                      <nav>
@@ -152,7 +154,7 @@ class ShopingCartController extends Controller
                                                 <div class="cost"><input type="number" class="input_cant update-cart" value="'.$cart->qty.'" data-id="'.$cart->rowId.'"> $ '.number_format($cart->subtotal, 2, '.', ',').'<div class="container_eliminar pull-right"><a href="#" class="delete-cart" data-id="'.$cart->rowId.'"><i class="fa fa-remove tipo_roja"></i></a></div></div>
                                             </div>
                                         </li>';
-                                        if($cart->id==$id){ $qty = $cart->qty; }
+                                        if($cart->id==$id){ $qty = $cart->qty; $ptotal = number_format($cart->subtotal, 2, '.', ',');}
                             }
                $html .= '</ul>
                      </nav>
@@ -161,7 +163,7 @@ class ShopingCartController extends Controller
                          <div class="total">Total: <ins>$ '.Cart::subtotal().'</ins></div>
                      </div>
                  </div>';
-        return response()->json(['html'=>$html,'error'=>$error, 'qty'=>$qty]);
+        return response()->json(['html'=>$html,'error'=>$error, 'qty'=>$qty, 'total'=>Cart::total(),'subtotal'=>Cart::subtotal(),'ptotal'=>$ptotal]);
     }
 
     public function pedidoCart(){

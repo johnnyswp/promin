@@ -751,7 +751,7 @@
                 </thead>
                 <tbody>
                     <?php $__currentLoopData = Cart::content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cart): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
+                    <tr id="pedido-<?php echo e($cart->id); ?>">
                         <td class="text-center">
                             <img src="<?php echo e($cart->options->img); ?>" alt="<?php echo e($cart->name); ?>" class="img-responsive" width="120">
                         </td>
@@ -764,13 +764,13 @@
                         </td>
                         <td>
                             <div class="counting inline-block">
-                                <a href="" class="a-less disabled">-</a>
-                                <input type="text" value="<?php echo e($cart->qty); ?>">
-                                <a href="" class="a-more">+</a>
+                                <a href="#" class="a-less <?php if($cart->qty<=1): ?> disabled <?php endif; ?> update-pedido" data-id="<?php echo e($cart->id); ?>" data-mode="remove">-</a>
+                                <input type="text" value="<?php echo e($cart->qty); ?>" id="input-cart-<?php echo e($cart->id); ?>" disabled>
+                                <a href="#" class="a-more update-pedido" data-id="<?php echo e($cart->id); ?>" data-mode="add">+</a>
                             </div>
                         </td>
                         <td class="text-right">
-                            <div class="tipo_negra">$ <?php echo e(number_format($cart->subtotal, 2, '.', ',')); ?></div>
+                            <div class="tipo_negra" id="subtotal-<?php echo e($cart->id); ?>">$ <?php echo e(number_format($cart->subtotal, 2, '.', ',')); ?></div>
                         </td>
                         <td class="text-center">
                             <a href="" class="pclose small tr-remove"><i class="custom-icon custom-icon-close-s"></i></a>
@@ -778,7 +778,7 @@
                     </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     <tr>
-                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong>Total: $ <?php echo e(Cart::subtotal()); ?></strong></div></td>
+                        <td colspan="5" class="text-right"><div class="tipo_negra"><strong id="subtotal">Sub-Total: $ <?php echo e(Cart::subtotal()); ?></strong></div></td>
                         <td></td>
                     </tr>
                     <tr>
@@ -786,7 +786,7 @@
                         <td></td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-right"><div class="tipo_naranja"><strong>Total: $<?php echo e(Cart::total()); ?></strong></div></td>
+                        <td colspan="5" class="text-right"><div class="tipo_naranja"><strong id="total">Total: $<?php echo e(Cart::total()); ?></strong></div></td>
                         <td></td>
                     </tr>
                 </tbody>
