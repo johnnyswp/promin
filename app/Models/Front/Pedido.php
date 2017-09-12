@@ -52,6 +52,8 @@ class Pedido extends Model {
                 'estado'    =>$pedido->status,
                 'factura'   =>$pedido->factura,
                 'telefono'  =>$pedido->telefono,
+                'vendedor'  =>$pedido->vendedor,
+                'email'  =>$pedido->email,
                 'nombre'    =>$pedido->nombre." ".$pedido->apellido ,
                 'fecha'     =>Carbon::parse($pedido->created_at)->format('d')."-".trans('main.'.Carbon::parse($pedido->created_at)->format('m'))."-".Carbon::parse($pedido->created_at)->format('Y')
             ]);
@@ -80,9 +82,7 @@ class Pedido extends Model {
                 $pdf[] = array(
                         'razon_social'  =>$PedidoDatoFacturacion->razon_social,
                         'rfc'           =>$PedidoDatoFacturacion->rfc,
-                        'cp'            =>$PedidoDatoFacturacion->cp,
-                        'calle'         =>$PedidoDatoFacturacion->calle,
-                        'n_ext'         =>$PedidoDatoFacturacion->n_ext
+                        'direccion'     =>$PedidoDatoFacturacion->calle." Col. ".$PedidoDatoFacturacion->colonia." Del/Mun. ".$PedidoDatoFacturacion->municipio." ".$PedidoDatoFacturacion->estado." C.P. ".$PedidoDatoFacturacion->cp." ".$PedidoDatoFacturacion->pais."."
                 );                 
 
             $p->put('facturacion', $pdf);
@@ -91,10 +91,7 @@ class Pedido extends Model {
             $p->pull('envio');
             $PedidoDatoEnvio=PedidoDatoEnvio::find($pedido->id);
                 $pde[] = array(
-                        'rfc'           =>$PedidoDatoEnvio->rfc,
-                        'cp'            =>$PedidoDatoEnvio->cp,
-                        'calle'         =>$PedidoDatoEnvio->calle,
-                        'n_ext'         =>$PedidoDatoEnvio->n_ext
+                        'direccion'           =>$PedidoDatoEnvio->calle." Col. ".$PedidoDatoEnvio->colonia." Del/Mun. ".$PedidoDatoEnvio->municipio." ".$PedidoDatoEnvio->estado." C.P. ".$PedidoDatoEnvio->cp." ".$PedidoDatoEnvio->pais."."
                 );                 
 
             $p->put('envio', $pde);

@@ -147,9 +147,44 @@ class DashboardController extends Controller
     public function detalle($id)
     {
         $pedido = Pedido::detalle($id);
-        dd($pedido);
+        
+        return view('admin.pages.dashboard.detalle')->with(['pedido'=>$pedido]);
+        
     }
 
+    public function saveOption($id,$tipo,Request $req)
+    {
+        $pedido = Pedido::find($id);
+
+        switch ($tipo) {
+            case 'cancel':
+                $pedido->status="cancelado";
+                $pedido->save();
+                return response()->json(['status'=>200]);
+                break;
+
+            case 'costo_envio':
+
+                break;
+            case 'venta':
+                $pedido->status="completado";
+                $pedido->vendedor=$req->vendedor;
+                $pedido->factura=$req->factura;
+                $pedido->comision=$req->comision;
+                $pedido->t_comprobante=$req->t_comprobante;                
+                $pedido->save();
+                return response()->json(['status'=>200]);
+                break;            
+            default:
+                # code...
+                break;
+        }
+        
+
+        
+        return view('admin.pages.dashboard.detalle')->with(['pedido'=>$pedido]);
+        
+    }
  
 
 }

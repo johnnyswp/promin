@@ -52,7 +52,7 @@
 
         <ul class="nav side-menu">
 
-          <li><a href="pedidos.php"><i class="fa fa-list-alt"></i> Pedidos</a></li>
+          <li><a href="{{url('admin/pedidos')}}"><i class="fa fa-list-alt"></i> Pedidos</a></li>
 
           <li><a href="{{url('admin/banners')}}"><i class="fa fa-picture-o"></i> Banners</a></li>
 

@@ -270,18 +270,18 @@
                                   <td class="text-right">$ {{$pedido->total}}</td>
                                   <td>
                                     @if($pe['estado']=='Pedido')
-                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a href="{{ url('/admin/pedidos/'.$pedido->id) }}" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                                         <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
                                         <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
                                     @elseif($pe['estado']=='En proceso')
-                                        <a href="pedido-2-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a href="{{ url('/admin/pedidos/'.$pedido->id) }}" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                                         <a class="btn btn-success btn-xs" alt="Venta" data-toggle="modal" data-target="#modal_vta"><i class="fa fa-check"></i></a>
                                         <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
                                     @elseif($pe['estado']=='completado')
-                                        <a href="pedido-4-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
+                                        <a href="{{ url('/admin/pedidos/'.$pedido->id) }}" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>
                                         <a class="btn btn-danger btn-xs" alt="Eliminar" data-toggle="modal" data-target="#modal_cancel"><i class="fa fa-remove"></i></a>
                                     @else 
-                                        <a href="pedido-1-ver.php" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>                                                                               
+                                        <a href="{{ url('/admin/pedidos/'.$pedido->id) }}" class="btn btn-info btn-xs" alt="Ver"><i class="fa fa-search"></i></a>                                                                               
                                     @endif                                   
                                   </td>
                             </tr>
@@ -323,8 +323,8 @@
             <div class="row">
               <div class="col-md-8">
                 <ul class="lista_radio_inline">
-                  <label class="radio-inline"><input type="radio" name="t_comprobante" checked="">Recibo</label>
-                  <label class="radio-inline"><input type="radio" name="t_comprobante">Factura</label>
+                  <label class="radio-inline"><input type="radio" name="t_comprobante" value="recibo" checked="">Recibo</label>
+                  <label class="radio-inline"><input type="radio" name="t_comprobante" value="factura" >Factura</label>
                 </ul>
                 <input type="text" class="form-control" placeholder="0" required="">
               </div>
@@ -335,7 +335,7 @@
               
               <div class="col-md-4">
                   <label>Vendió</label>
-                  <select class="form-control">
+                  <select name="vendedor" class="form-control">
                     <option value="">Promin.mx</option>
                     <option value="">Guillermo Yllescas</option>
                     <option value="">Rafael Domínguez</option>
@@ -349,7 +349,7 @@
 
               <div class="col-md-4">
                   <label>Comisión</label>
-                  <input type="text" class="form-control" placeholder="$ 0.00"> <!-- cero por default -->
+                  <input name="comision" type="text" class="form-control" placeholder="$ 0.00"> <!-- cero por default -->
               </div>
             </div>
           </div>
@@ -403,7 +403,7 @@
               
               <div class="col-md-12">
                   <label>Costo de envío:</label>
-                  <input type="text" required="">
+                  <input type="text" name="costo" required="">
               </div>
 
             </div>
